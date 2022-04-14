@@ -11,7 +11,7 @@
     For more details:
     * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
   -->
-  <base href="/">
+  <base href="./">
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
@@ -58,6 +58,10 @@
               serviceWorker.addEventListener('statechange', () => {
                 if (serviceWorker.state == 'activated') {
                   console.log('Installed new service worker.');
+                  console.log(
+                  "sdcsdcsdc\
+                  sdcsdc\
+                  sdcsdcsd");
                   loadMainDartJs();
                 }
               });
@@ -70,6 +74,7 @@
               // When the app updates the serviceWorkerVersion changes, so we
               // need to ask the service worker to update.
               console.log('New service worker available.');
+
               reg.update();
               waitForActivation(reg.installing);
             } else {
