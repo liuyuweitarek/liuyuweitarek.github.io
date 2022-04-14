@@ -58719,7 +58719,7 @@ A.CZ.prototype={
 R(a,b){var s=null,r=A.Bg(A.a([new A.Hp(s),new A.zI(s),A.mp(s,500,s)],t.p),B.aX,B.bH)
 return new A.vP(new A.GC(!0,r,s),s)}}
 A.O1.prototype={
-R(a,b){return new A.ux(new A.CZ(null),"Flutter Demo",A.adv(null,B.q1),!1,null)}}
+R(a,b){return new A.ux(new A.CZ(null),"Tarek LiuYuWei",A.adv(null,B.q1),!1,null)}}
 A.zI.prototype={
 R(a,b){var s=null,r=t.p
 return A.ff(s,A.Bg(A.a([A.vO(A.a([new A.zJ(s),A.a7d(new A.rd($.ahH(),s),1),A.a7d(new A.rd($.ahI(),s),1)],r),B.br,B.eW,B.b7),A.mp(s,40,s),A.vO(A.a([new A.El("assets/images/hand.png","Hire Me!",new A.Ow(),s),A.mp(s,s,50),new A.BB("assets/images/downloadcv.png","Download CV!",new A.Ox(),s)],r),B.aX,B.pQ,B.b7)],r),B.aX,B.bH),s,new A.aA(0,1200,0,1/0),s,s,new A.bh(0,40,0,40),s,s)}}
