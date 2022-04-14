@@ -11,7 +11,7 @@
     For more details:
     * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
   -->
-  <base href="./">
+  <base href="/">
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
@@ -32,7 +32,7 @@
        application. For more information, see:
        https://developers.google.com/web/fundamentals/primers/service-workers -->
   <script>
-    var serviceWorkerVersion = '1740773080';
+    var serviceWorkerVersion = '3000405776';
     var scriptLoaded = false;
     function loadMainDartJs() {
       if (scriptLoaded) {
@@ -58,10 +58,21 @@
               serviceWorker.addEventListener('statechange', () => {
                 if (serviceWorker.state == 'activated') {
                   console.log('Installed new service worker.');
-                  console.log(
-                  "sdcsdcsdc\
-                  sdcsdc\
-                  sdcsdcsd");
+                  var url = "https://raw.githubusercontent.com/liuyuweitarek/liuyuweitarek.github.io/main/assets/assets/images/cat_dude-removebg-preview.png";
+                  console.image = function(url, size = 100) {
+                    var image = new Image();
+                    image.onload = function() {
+                      var style = [
+                        'font-size: 1px;',
+                        'padding: ' + this.height/100*size + 'px ' + this.width/100*size + 'px;',
+                        'background: url('+ url +') no-repeat;',
+                        'background-size: contain;'
+                      ].join(' ');
+                      console.log('%c ', style);
+                    };
+                    image.src = url;
+                  };
+                  console.image(url,100);
                   loadMainDartJs();
                 }
               });
@@ -74,7 +85,6 @@
               // When the app updates the serviceWorkerVersion changes, so we
               // need to ask the service worker to update.
               console.log('New service worker available.');
-
               reg.update();
               waitForActivation(reg.installing);
             } else {
