@@ -10,6 +10,9 @@
 
     For more details:
     * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+
+    This is a placeholder for base href that will be replaced by the value of
+    the `--base-href` argument provided to `flutter build`.
   -->
   <base href="/">
 
@@ -20,11 +23,14 @@
   <!-- iOS meta tags & icons -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="liuyuweitarek">
+  <meta name="apple-mobile-web-app-title" content="responsive_liuyuweitarek">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <!-- Favicon -->
   <link rel="shortcut icon" href="favicon.ico?" type="image/x-icon">
   <link rel="icon" href="favicon.ico?" type="image/x-icon">
-  <title>Tarek LiuYuWei</title>
+
+  <title>responsive_liuyuweitarek</title>
   <link rel="manifest" href="manifest.json">
 </head>
 <body>
@@ -32,7 +38,7 @@
        application. For more information, see:
        https://developers.google.com/web/fundamentals/primers/service-workers -->
   <script>
-    var serviceWorkerVersion = '3944954907';
+    var serviceWorkerVersion = '2374991149';
     var scriptLoaded = false;
     function loadMainDartJs() {
       if (scriptLoaded) {
@@ -80,7 +86,7 @@
             if (!reg.active && (reg.installing || reg.waiting)) {
               // No active web worker and we have installed or are installing
               // one for the first time. Simply wait for it to activate.
-              waitForActivation(reg.installing ?? reg.waiting);
+              waitForActivation(reg.installing || reg.waiting);
             } else if (!reg.active.scriptURL.endsWith(serviceWorkerVersion)) {
               // When the app updates the serviceWorkerVersion changes, so we
               // need to ask the service worker to update.
