@@ -1,16 +1,18 @@
-name: Build website and deploy to Github Pages
+name: Build, deploy to gh-pages and renew index
 
 on:
   push:
+    paths-ignore:
+      - README.md
     branches:
       - main
   workflow_dispatch:
 
 jobs:
   deploy:
-    if: github.repository_owner == 'pkosiec'
-    name: Deploy to GitHub Pages
+    name: Build website
     runs-on: ubuntu-latest
+    environment: github-pages
     permissions:
       contents: write
     env:
@@ -18,8 +20,8 @@ jobs:
       API_KEY: ${{ secrets.API_KEY }}
       INDEX_NAME: ${{ secrets.INDEX_NAME }}
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 20.x
           cache: npm
@@ -27,12 +29,19 @@ jobs:
       - name: Install dependencies
         run: npm install
       
+      - name: Create .env file
+        uses: ozaytsev86/create-env-file@v1
+        with:
+          ENV_APPLICATION_ID: ${{ secrets.APPLICATION_ID }}
+          ENV_API_KEY: ${{ secrets.API_KEY }}
+          ENV_INDEX_NAME: ${{ secrets.INDEX_NAME }}
+      
       - name: Build website
         run: npm run build
       
       - name: Create .nojekyll file for GitHub Pages
         run: |
-          touch build/test-site/.nojekyll
+          mkdir -p build/test-site/ && touch -f build/test-site/.nojekyll
       
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
@@ -50,6 +59,6 @@ jobs:
         uses: signcl/docsearch-scraper-action@master
         env:
           INDEX_NAME: ${{ secrets.INDEX_NAME }}
-          APPLICATION_ID: ${{ secrets.ALGOLIA_APPLICATION_ID }}
-          API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
+          APPLICATION_ID: ${{ secrets.APPLICATION_ID }}
+          API_KEY: ${{ secrets.API_KEY }}
           CONFIG: ${{ steps.algolia_config.outputs.config }}

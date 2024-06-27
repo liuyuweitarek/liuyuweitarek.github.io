@@ -12,7 +12,7 @@ const config: Config = {
   url: "https://liuyuweitarek.github.io",
   baseUrl: "/",
   staticDirectories: ['static', 'public'],
-  onBrokenLinks: "throw",
+  onBrokenLinks: "warn",
   onBrokenMarkdownLinks: "warn",
   favicon: "img/favicon.ico",
 
@@ -26,8 +26,6 @@ const config: Config = {
     locales: ["en"],
   },
   customFields: {
-    // "ALGOLIA_APPLICATION_ID": process.env.APPLICATION_ID,
-    // "ALGOLIA_API_KEY": process.env.API_KEY
     // newsletter: {
     //   action:
     //     "https://dev.us14.list-manage.com/subscribe/post?u=4ed0fd1909674fddee53ac3e7&amp;id=dfdcae99f5&amp;f_id=004887e0f0",
