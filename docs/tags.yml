@@ -1,0 +1,4 @@
+docusaurus:
+  label: 'Manual'
+  permalink: '/manual'
+  description: 'Docs related to the this site's framework'
