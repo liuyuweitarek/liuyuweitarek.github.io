@@ -233,7 +233,7 @@ const config: Config = {
           ],
         },
         {
-          title: "Sponsor",
+          title: "Sponsorship",
           items: [
             {
               html: `
@@ -245,7 +245,7 @@ const config: Config = {
           ]
         }
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Tarek Liu. All rights reserved.`,
+      copyright: `Copyright © 2021-${new Date().getFullYear()} Tarek Liu. All rights reserved.`,
     },
     algolia: {
       appId: process.env.APPLICATION_ID,
