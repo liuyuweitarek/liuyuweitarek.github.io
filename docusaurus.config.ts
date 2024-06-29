@@ -83,7 +83,7 @@ const config: Config = {
           editUrl: "https://github.com/liuyuweitarek/liuyuweitarek.github.io/tree/main/",
           feedOptions: {
             type: "all",
-            copyright: `Copyright © ${new Date().getFullYear()} Tarek Liu. All rights reserved.`,
+            copyright: `All content copyright © 2021-${new Date().getFullYear()} <a href="https://github.com/liuyuweitarek" target="_blank">Tarek Liu</a>. All rights reserved.<br/>The web page uses the <a href="https://github.com/liuyuweitarek/liuyuweitarek.githun.io/blob/main/LICENSE_PAGE_TEMPLATE.md" target="_blank">MIT License</a> licensed template <a href="https://github.com/pkosiec/website" target="_blank">pkosiec/website</a>. `,
           },
         },
         theme: {
@@ -245,7 +245,7 @@ const config: Config = {
           ]
         }
       ],
-      copyright: `Copyright © 2021-${new Date().getFullYear()} Tarek Liu. All rights reserved.`,
+      copyright: `All content copyright © 2021-${new Date().getFullYear()} <a href="https://github.com/liuyuweitarek" target="_blank">Tarek Liu</a>. All rights reserved.<br/>The web page uses the <a href="https://github.com/liuyuweitarek/liuyuweitarek.githun.io/blob/main/LICENSE_PAGE_TEMPLATE.md" target="_blank">MIT License</a> licensed template <a href="https://github.com/pkosiec/website" target="_blank">pkosiec/website</a>. `,
     },
     algolia: {
       appId: process.env.APPLICATION_ID,
