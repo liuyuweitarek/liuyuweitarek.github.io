@@ -2,6 +2,8 @@ import { themes } from "prism-react-renderer";
 
 import type { Config } from "@docusaurus/types";
 import type * as Preset from "@docusaurus/preset-classic";
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
 
 require('dotenv').config()
 
@@ -71,7 +73,8 @@ const config: Config = {
           docVersionRootComponent: '@theme/DocVersionRoot',
           docRootComponent: '@theme/DocRoot',
           docItemComponent: '@theme/DocItem',
-          remarkPlugins: [require('remark-math')],
+          remarkPlugins: [remarkMath],
+          rehypePlugins: [[rehypeKatex, { strict: false }]],
           showLastUpdateAuthor: false,
           showLastUpdateTime: true,
           lastVersion: 'current',
@@ -89,11 +92,21 @@ const config: Config = {
         theme: {
           customCss: [
             require.resolve("./src/css/custom.scss"), 
-            require.resolve("./src/css/doc-overview-page.scss")
+            require.resolve("./src/css/doc-overview-page.scss"),
+            require.resolve("./src/css/tagsearch.css"),
           ],
         },
       } satisfies Preset.Options,
     ],
+  ],
+  stylesheets: [
+    {
+      href: 'https://cdn.jsdelivr.net/npm/katex@0.13.24/dist/katex.min.css',
+      type: 'text/css',
+      integrity:
+        'sha384-odtC+0UGzzFL/6PNoE8rX/SPcQDXBJ+uRepguP4QkPCm2LBxH3FA3y+fKSiJ+AmM',
+      crossorigin: 'anonymous',
+    },
   ],
   themeConfig: {
     docs: {
@@ -194,7 +207,7 @@ const config: Config = {
             },
             {
               label: "Note",
-              to: "/note",
+              to: "/docs/note",
             },
             {
               label: "Projects",
