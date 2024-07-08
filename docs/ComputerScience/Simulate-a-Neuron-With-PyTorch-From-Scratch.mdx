@@ -3,31 +3,713 @@ id: simulate-a-neuron-with-pytorch
 title: Simulate a neuron with PyTorch
 hide_title: true
 sidebar_position: 3
-tags: ['Video-Note', 'Pytorch-Implementation', 'Deep-Learning', 'Computer-Science']
+tags: ['pytorch', 'implementation', 'deep-learning', 'computer-science']
 draft: false
 last_update:
-  date: 7/2/2024
+  date: 12/2/2022
   author: Tarek Liu
 ---
+import Image from '@theme/IdealImage';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import SimpleNeuron from '../assets/computer-science/Simple-Neuron.png';
+import GroundTruthResponse from '../assets/computer-science/Simple-Neuron-Network-Real-World.png';
+
 ## Simulate a neuron with PyTorch
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/FHdlXe1bSe4?si=nB1P8Lt1-bFrSJf1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-<br/>
-Following with the video, I will implement a neural network for a neuron using PyTorch, observing how to simulate and approximate the all-or-none laws of physics through real-world observed data. See more details in [my Google Colab Playground](https://colab.research.google.com/drive/1_Qy1WdfnL1dPLt_022MUn6tHo0RTGExo?usp=sharing).
+This note followed [Josh's awesome video](https://youtu.be/FHdlXe1bSe4?si=jKpR6qk2DGrDICpA)<sup>[1](#ref-1)</sup> to implement a neural network simulating the all-or-none law of action potentials using pytorch. Additionally, to understand the computations behind the training, I have organized the "computation process" and "source code verification" in this note.
+ 
+You can play with your own data in [my Google Colab Playground](https://colab.research.google.com/drive/1x36lSmRdi8dOPkjzhhjuF8AZbnQWOnzl?usp=sharing).
 
-### Related Notes
+:::info[Announcement: Not Original Content]
 
-1. [How is loss.backward() specifically calculated?](./Calulate-Forward-and-Backward-Propagation-with-Example.mdx)
+The code comes from Josh's video. See the original video [here](https://www.youtube.com/watch?v=FHdlXe1bSe4). Thanks to Josh for his high-quality, easy-to-understand videos and for supporting this article!🎉 Triple Bam!!!
 
-2. [How does Stochastic Gradient Descent adjust b_final?](./Explaination-of-Stochastic-Gradient-Descent.mdx)
+:::
 
-3. [How to fix the experiment results in PyTorch?](./Experiment-Tips-Reproducibility-and-Randomness.mdx) 
+Let's get started!
 
-   i.e., obtaining the same `b_final` result after each training session.
+### Neuron
 
-### Related Blogs
+The human brain is composed of hundreds of billions of nerve cells, also known as neurons. These neurons are specialized cells that transmit electrical signals. When receptors on the cell surface receive neurotransmitters, the neuron generates an action potential to transmit the message.
 
-- [Simulate a Neuron Using Pytorch From Scratch and Explain the Math Calculations](../../blog/simulate-a-neuron-using-pytorch-from-scratch-and-explain-the-math-calculations.mdx)
+Below is a neuron look like:
+
+<p align="center">
+  <img src={SimpleNeuron.src} alt="simple-neuron"/>
+  <br/>
+  <em>Figure 1. A neuron.</em>
+</p>
+
+
+#### All-or-none Law
+
+The all-or-none law of neural action potentials states that when the stimulation of a neuron reaches a certain threshold, a full action potential is generated; if the stimulation does not reach the threshold, no action potential is produced. In other words, the action potential either occurs completely or not at all, with no intermediate states.
+
+Here is a diagram showing the relationship between electrical stimulation (X) and the action potential response (Y):
+
+```
+  Y(Effectiveness)
+         /|\
+          |                        ________
+          |                       |        |
+          |                       |        |
+          |                       |        |
+          |_______________________|        |______________
+          |      |      |      |      |      |      |  
+          |______|______|______|______|______|______|______\ X (Doses)
+                                                           / 
+
+```
+<p align="center"><i>Figure 2. Effectiveness vs. Dose Relationship</i></p>
+### Implement a Neuron-like network with PyTorch
+
+Assume the structure below is the neuron in the real world.
+
+<p align="center">
+  <Image img={require('../assets/computer-science/Simple-Neuron-Network-Real-World.png')} />
+  <em>Figure 3. Assumption ground truth of neuron network.</em>
+</p>
+
+Implement it with PyTorch:
+
+```python
+class BasicNN(nn.Module):
+  def __init__(self):
+    '''Define the layers of the network.'''
+    super(BasicNN, self).__init__()
+    # Layer 0 - Top Path
+    self.w00 = nn.Parameter(torch.tensor(1.7), requires_grad=False)
+    self.b00 = nn.Parameter(torch.tensor(-0.85), requires_grad=False)
+    # Layer 0 - Bottom Path
+    self.w01 = nn.Parameter(torch.tensor(12.6), requires_grad=False)
+    self.b01 = nn.Parameter(torch.tensor(0.00), requires_grad=False)
+
+    # Layer 1 - Top Path
+    self.w10 = nn.Parameter(torch.tensor(-40.8), requires_grad=False)
+    # Layer 1 - Bottom Path
+    self.w11 = nn.Parameter(torch.tensor(2.7), requires_grad=False)
+
+    # Final bias
+    self.b_final = nn.Parameter(torch.tensor(-16), requires_grad=False)
+
+  def forward(self, input_value):
+    '''Define the forward pass.'''
+    # Top Path
+    input_to_top_relu = input_value*self.w00 + self.b00
+    top_relu_output = F.relu(input_to_top_relu)
+    scaled_top_relu_output = top_relu_output*self.w10
+
+    # Bottom Path
+    input_to_bottom_relu = input_value*self.w01 + self.b01
+    bottom_relu_output = F.relu(input_to_bottom_relu)
+    scaled_bottom_relu_output = bottom_relu_output*self.w11
+
+    # Converge throught final bias
+    input_to_final_relu = scaled_top_relu_output + scaled_bottom_relu_output + self.b_final
+    output = F.relu(input_to_final_relu)
+    return output
+```
+
+Mock electrical stimuli data with [torch.linspace()](https://pytorch.org/docs/stable/generated/torch.linspace.html):
+
+```python
+input_doses = torch.linspace(0, 1, steps=11)
+# Output
+# 0, 0.1, 0.2, ..., 1.0 represent doses
+```
+
+We then input a series of doses and expect to produce a response only at a specific dose.
+
+```python
+# Implement Neuron
+model = BasicNN()
+
+# Input doses to neuron
+output_values = model(input_doses)
+```
+
+```python
+# Draw results
+sns.set(style="whitegrid")
+sns.lineplot(
+    x=input_doses,
+    y=output_values,
+    color="green",
+    linewidth=2.5
+)
+plt.ylabel("Effectiveness")
+plt.xlabel("Doses")
+```
+
+The results seem to align with our expectations!
+
+<p align="center">
+  <Image img={require('../assets/computer-science/Response-Real-World.png')} style={{width: 500}} />
+  <em>Figure 4. Response of the ground truth.</em>
+</p>
+
+### However, what's going on in the real world?
+
+Although the simulation above looks ideal, in the real world, we won't have the parameters (e.g. $W_{ij}$, $B_{ij}$) in the model, nor will we know what the active function should look like.
+
+To see how backpropagation works, let's erase a parameter($b_{\text{final}}$) value and see if we can 'train' the model by 'observing' the data to 'approximate' the real-world situation.
+
+Modify $b_{\text{final}}$ from `-16` to `0` and change the $b_{\text{final}}$ parameter to require gradients(`requires_grad=True`):
+
+```python
+class BasicNN_train(nn.Module):
+  def __init__(self):
+    '''Define the layers of the network.'''
+    super(BasicNN_train, self).__init__()
+    '''  ... (the same) ...    '''
+
+    # Final bias
+    # Edit here
+    self.b_final = nn.Parameter(torch.tensor(0.00), requires_grad=True) 
+
+  def forward(self, input_value):
+    '''Define the forward pass.'''
+    '''  ... (the same) ...    '''
+```
+
+Now, the spikes of this neuron network look like below.
+
+<p align="center">
+  <Image img={require('../assets/computer-science/Response-Untrained.png')} style={{width: 500}}/>
+  <em>Figure 5. Response of the untrained model.</em>
+</p>
+
+By observing the neuron's response, we know that the neuron will fire an action potential at a <ins>**SPECIFIC**</ins> stimulus potential.
+
+Let's assume that the stimulus potential that triggers an action potential is `0.5`, and the neuron will not respond to other stimulus potentials. We may get three data points based on our observation in the real world.
+
+```python
+# Observed Data
+stimuli = torch.tensor([0., 0.5, 1.])
+response = torch.tensor([0., 1., 0.])
+```
+
+Let's train the neuron network with these data!
+
+```python
+# Define the optimizer: Stochastic Gradient Descent
+optimizer = SGD(model.parameters(), lr=0.1)
+print("Final bias, before optimization: " + str(model.b_final.data) + "\n")
+```
+
+```python
+for epoch in range(100):
+  total_loss = 0
+  for iteration in range(len(stimuli)):
+    stimuli_i, response_i = stimuli[iteration], response[iteration]
+    output_i = model(stimuli_i)
+    loss = (output_i - response_i)**2 # It's mean square error here, which batch size is 1.
+
+    # Calculate gradient, here is only for b_final
+    loss.backward()
+
+    total_loss += float(loss)
+
+  # Adapt b_final parameter
+  optimizer.step()
+
+  # Clear accumulated gradient and start another training loop.
+  optimizer.zero_grad()
+
+  # Observe the changes in "b_fianl" and the "loss" during each training epoch.
+  print(f"Epoch {epoch+1} | Loss:{total_loss} | b_final: {str(model.b_final.detach())}")
+```
+
+The responses of the trained model look like below:
+
+<p align="center">
+  <Image img={require('../assets/computer-science/Response-Trained.png')} style={{width: 500}}/>
+  <em>Figure 6. Response of the trained model.</em>
+</p>
+
+After optimization, $b_{\text{final}}$ fixed from `0` to `-16.01`, which approximates our assumed ground truth value of `-16`!🎉
+
+## The Calculation of the Training Process.
+
+The training process was repeated 100 times (Epoch = 100). In each training session, three observed data points were reviewed one by one. Each data point was input into the model for prediction and loss calculation. After accumulating the loss, the model parameters were adjusted. Overall, the training process includes four main steps: Forward, Loss Calculation, Backward, and Update Parameters.
+
+Here, I will calculate the process for `Epoch = 1` and show the results for all epochs at the end.
+
+You can click on the corresspond data tab to view each data's calculations and verifications for each step. 
+
+<div align="center">
+
+||F(0.)=0.|F(0.5)=1.|F(1.)=0.|
+|:--|:--:|:--:|:--:|
+|Stimuli(X)|0.|0.5|1.|
+|Response(Y)|0.|1.|0.|
+
+</div>
+
+### 1. Forward Process 
+    
+The data flows through the tensor to compute the **Predict Value**, which denoted as $\^{Y}$.
+
+#### Rectified Linear Unit, ReLU
+Before forward process, we need to understand how the ReLU function operates:
+
+$$
+\text{ReLU}(x) = \max(0, x)
+$$
+
+or,
+
+$$
+\text{ReLU}(x) = 
+\begin{cases} 
+0 & \text{if } x \leq 0 \\
+x & \text{if } x > 0 
+\end{cases}
+$$
+
+ReLU is computationally efficient, as it only needs to determine whether the input is greater than 0.
+
+Let's get started!
+
+<p align="center">
+    <Image img={require('../assets/computer-science/b-final-1.png')} />
+    <em>
+      Figure 7. Neuron network before input F(0.), b_<sub>final</sub> = 0.
+    </em>
+  </p>
+
+<Tabs groupId="input-observed-data">
+  <TabItem value="F(0.)=0." label="F(0.)=0.">
+
+  $ Given \ that $
+  $$
+  \begin{align*}
+  Stimili(X)&=0. \\ 
+  Response(Y)&=0. \\
+  \end{align*}
+  $$
+
+  <h4>Top Path:</h4>
+  
+  $$
+  \begin{align*}
+  \text{input\_to\_top\_relu} & = \text{input\_value} \times w_{00} + b_{00} \\
+  
+  & = 0 \times 1.7 + (-0.85) \\
+  &= -0.85 \\
+  
+  \text{top\_relu\_output} & = \text{ReLU}(\text{input\_to\_top\_relu}) \\
+  
+  & = \text{ReLU}(-0.85) \\
+  & = 0 \\
+
+  \text{scaled\_top\_relu\_output} & = \text{top\_relu\_output} \times w_{10} \\
+
+  & = 0 \times (-40.8) \\ 
+  & = 0 \\
+  \end{align*}
+  $$
+  
+  <h4>Bottom Path:</h4>
+  
+  $$
+  \begin{align*}
+  \text{input\_to\_bottom\_relu} & = \text{input\_value} \times w_{01} + b_{01} \\
+  & = 0 \times 12.6 + 0.00 \\ 
+  & = 0 \\
+
+  \text{bottom\_relu\_output} & = \text{ReLU}(\text{input\_to\_bottom\_relu}) \\
+  & = \text{ReLU}(0) \\ 
+  & = 0 \\
+  
+  \text{scaled\_bottom\_relu\_output} & = \text{bottom\_relu\_output} \times w_{11} \\
+  & = 0 \times 2.7 \\ 
+  & = 0 \\
+  
+  \end{align*}
+  $$
+  
+  <h4>Final Bias:</h4>
+  
+  $$
+  \begin{align*}
+  \text{input\_to\_final\_relu} & = \text{scaled\_top\_relu\_output} + \text{scaled\_bottom\_relu\_output} + b_{\text{final}} \\
+
+  & = 0 + 0 + (0) \\
+  & = 0 \\
+
+  \text{output} & = \text{ReLU}(\text{input\_to\_final\_relu}) \\
+
+  & = \text{ReLU}(0) \\
+  &= 0 \\
+
+  \hat{Y} & = \text{output} = 0
+
+  \end{align*}
+  $$
+  
+  </TabItem>
+  <TabItem value="F(0.5)=1." label="F(0.5)=1.">
+  $ Given \ that $
+  
+  $$
+  \begin{align*}
+  Stimili(X)&=0.5 \\ 
+  Response(Y)&=1 \\
+  \end{align*}
+  $$
+
+  <h4>Top Path:</h4>
+  
+  $$
+  \begin{align*}
+  \text{input\_to\_top\_relu} & = \text{input\_value} \times w_{00} + b_{00} \\
+  
+  & = 0.5 \times 1.7 + (-0.85) \\
+  &= 0 \\
+  
+  \text{top\_relu\_output} & = \text{ReLU}(\text{input\_to\_top\_relu}) \\
+  
+  & = \text{ReLU}(0) \\
+  & = 0 \\
+
+  \text{scaled\_top\_relu\_output} & = \text{top\_relu\_output} \times w_{10} \\
+
+  & = 0 \times (-40.8) \\ 
+  & = 0 \\
+  \end{align*}
+  $$
+  
+  <h4>Bottom Path:</h4>
+  
+  $$
+  \begin{align*}
+  \text{input\_to\_bottom\_relu} & = \text{input\_value} \times w_{01} + b_{01} \\
+  & = 0.5 \times 12.6 + 0.00 \\ 
+  & = 6.3 \\
+
+  \text{bottom\_relu\_output} & = \text{ReLU}(\text{input\_to\_bottom\_relu}) \\
+  & = \text{ReLU}(6.3) \\ 
+  & = 6.3 \\
+  
+  \text{scaled\_bottom\_relu\_output} & = \text{bottom\_relu\_output} \times w_{11} \\
+  & = 6.3 \times 2.7 \\ 
+  & = 17.01 \\
+  
+  \end{align*}
+  $$
+  
+  <h4>Final Bias:</h4>
+  
+  $$
+  \begin{align*}
+  \text{input\_to\_final\_relu} & = \text{scaled\_top\_relu\_output} + \text{scaled\_bottom\_relu\_output} + b_{\text{final}} \\
+
+  & = 0 + 17.01 + (0) \\
+  & = 17.01 \\
+
+  \text{output} & = \text{ReLU}(\text{input\_to\_final\_relu}) \\
+
+  & = \text{ReLU}(17.01) \\
+  &= 17.01 \\
+
+  \hat{Y} & = \text{output} = 17.01
+
+  \end{align*}
+  $$
+  </TabItem>
+  <TabItem value="F(1.)=0." label="F(1.)=0.">
+  
+  $ Given \ that $
+  $$
+  \begin{align*}
+  Stimili(X)&=1 \\ 
+  Response(Y)&=0 \\
+  \end{align*}
+  $$
+
+  <h4>Top Path:</h4>
+  
+  $$
+  \begin{align*}
+  \text{input\_to\_top\_relu} & = \text{input\_value} \times w_{00} + b_{00} \\
+  
+  & = 1 \times 1.7 + (-0.85) \\
+  &= 0.85 \\
+  
+  \text{top\_relu\_output} & = \text{ReLU}(\text{input\_to\_top\_relu}) \\
+  
+  & = \text{ReLU}(0.85) \\
+  & = 0.85 \\
+
+  \text{scaled\_top\_relu\_output} & = \text{top\_relu\_output} \times w_{10} \\
+
+  & = 0.85 \times (-40.8) \\ 
+  & = -34.68 \\
+  \end{align*}
+  $$
+  
+  <h4>Bottom Path:</h4>
+  
+  $$
+  \begin{align*}
+  \text{input\_to\_bottom\_relu} & = \text{input\_value} \times w_{01} + b_{01} \\
+  & = 1 \times 12.6 + 0.00 \\ 
+  & = 12.6 \\
+
+  \text{bottom\_relu\_output} & = \text{ReLU}(\text{input\_to\_bottom\_relu}) \\
+  & = \text{ReLU}(12.6) \\ 
+  & = 12.6 \\
+  
+  \text{scaled\_bottom\_relu\_output} & = \text{bottom\_relu\_output} \times w_{11} \\
+  & = 12.6 \times 2.7 \\ 
+  & = 34.02 \\
+  
+  \end{align*}
+  $$
+  
+  <h4>Final Bias:</h4>
+  
+  $$
+  \begin{align*}
+  \text{input\_to\_final\_relu} & = \text{scaled\_top\_relu\_output} + \text{scaled\_bottom\_relu\_output} + b_{\text{final}} \\
+
+  & = -34.68 + 34.02 + (0) \\
+  & = -0.66 \\
+
+  \text{output} & = \text{ReLU}(\text{input\_to\_final\_relu}) \\
+
+  & = \text{ReLU}(-0.66) \\
+  &= 0 \\
+
+  \hat{Y} & = \text{output} = 0
+
+  \end{align*}
+  $$
+  </TabItem>
+</Tabs>
+
+### 2. Calculating Loss
+
+To compute the loss, we measure the difference between the predicted value and the observed value. 
+
+In this example, we simplify the process by squaring the difference between the predicted value ($\hat{Y}$) and the observed value ($Y$). 
+
+The general formula for the loss function in this case is Mean Square Error(MSE):
+
+$$
+\begin{align*}
+Loss(\hat{Y}, Y) = \sum_{i=1}^{n} \frac{1}{N} (\hat{Y}_i - Y_i)^2
+\end{align*}
+$$
+
+However, given the high level of simplification in this example, each batch (i.e., the number of data points fed into the model each time) contains only one data point, so ($N=1$). Thus, the loss function simplifies to:
+
+$$
+Loss(\hat{Y}, Y) = (\hat{Y} - Y)^2
+$$
+
+<Tabs groupId="input-observed-data">
+  <TabItem value="F(0.)=0." label="F(0.)=0.">
+  
+  $\text{Given } \hat{Y} = 0, Response(Y) = 0,$
+  
+  $$
+  \begin{align*}
+  Loss(\hat{Y}, Y) & = (\hat{Y} - Y)^2 \\
+  & = ( 0 - 0 )^2 \\
+  & = 0
+  \end{align*}
+  $$
+  
+  </TabItem>
+  <TabItem value="F(0.5)=1." label="F(0.5)=1.">
+  
+  $\text{Given } \hat{Y} = 17.01., Response(Y) = 1,$
+  
+  $$
+  \begin{align*}
+  Loss(\hat{Y}, Y) & = (\hat{Y} - Y)^2 \\
+  & = ( 17.01 - 1 )^2 \\
+  & = 256.3201
+  \end{align*}
+  $$
+
+  </TabItem>
+  <TabItem value="F(1.)=0." label="F(1.)=0.">
+  
+  $\text{Given } \hat{Y} = 0, Response(Y) = 0,$
+  
+  $$
+  \begin{align*}
+  Loss(\hat{Y}, Y) & = (\hat{Y} - Y)^2 \\
+  & = ( 0 - 0 )^2 \\
+  & = 0
+  \end{align*}
+  $$
+  
+  </TabItem>
+</Tabs>
+
+### 3. Backward Process 
+    
+Compute the gradient, which is the "direction" in which the parameters should be adjusted next. 
+
+Our training parameter is $b_{final}$; therefore, we need to calculate:
+
+$$
+\frac{\partial \text{loss}}{\partial {b_{final}}}
+$$
+
+To do so, we need to use Chain Rule:
+
+$$
+   \frac{\partial \text{loss}}{\partial b_{\text{final}}} = \frac{\partial \text{loss}}{\partial \text{output}} \cdot \frac{\partial \text{output}}{\partial \text{input\_to\_final\_relu}} \cdot \frac{\partial \text{input\_to\_final\_relu}}{\partial b_{\text{final}}}
+$$
+
+Calculate the gradient of the loss with respect to $ b_{\text{final}} $:
+
+- **Partial derivative of the loss with respect to the output:**
+  $$
+  \frac{\partial \text{loss}}{\partial \text{output}} = 2 \cdot (\text{output} - \text{response\_value})
+  $$
+
+- **Partial derivative of the output with respect to the input to the final ReLU:**
+  $$
+  \frac{\partial \text{output}}{\partial \text{input\_to\_final\_relu}} = 
+  \begin{cases} 
+  1 & \text{if } \text{input\_to\_final\_relu} > 0 \\
+  0 & \text{if } \text{input\_to\_final\_relu} \leq 0 
+  \end{cases}
+  $$
+
+- **Partial derivative of the input to the final ReLU with respect to $ b_{\text{final}} $:**
+  $$
+  \frac{\partial \text{input\_to\_final\_relu}}{\partial b_{\text{final}}} = 1
+  $$
+
+<Tabs groupId="input-observed-data">
+  <TabItem value="F(0.)=0." label="F(0.)=0.">
+  Substituting the values:
+
+  $$
+  \frac{\partial \text{loss}}{\partial \text{output}} = 2 \cdot (0 - 0) = 0
+  $$
+
+  Since $ \text{input\_to\_final\_relu} = 0 $, which is equal to 0:
+  
+  $$
+  \frac{\partial \text{output}}{\partial \text{input\_to\_final\_relu}} = 0
+  $$
+
+  Combining these, we get:
+
+  $$
+  \frac{\partial \text{loss}}{\partial b_{\text{final}}} = \frac{\partial \text{loss}}{\partial \text{output}} \cdot \frac{\partial \text{output}}{\partial \text{input\_to\_final\_relu}} \cdot \frac{\partial \text{input\_to\_final\_relu}}{\partial b_{\text{final}}} = 0 \cdot 0 \cdot 1 = 0
+  $$
+
+  Therefore, the gradient of the loss with respect to $ b_{\text{final}} $ is:
+
+  $$
+  \frac{\partial \text{loss}}{\partial b_{\text{final}}} = 0
+  $$
+
+  </TabItem>
+  <TabItem value="F(0.5)=1." label="F(0.5)=1.">
+
+  Substituting the values:
+
+  $$
+  \frac{\partial \text{loss}}{\partial \text{output}} = 2 \cdot (17.01 - 1.0) = 2 \cdot 16.01 = 32.02
+  $$
+
+  Since $ \text{input\_to\_final\_relu} = 17.01 $, which is greater than 0:
+  
+  $$
+  \frac{\partial \text{output}}{\partial \text{input\_to\_final\_relu}} = 1
+  $$
+
+  Combining these, we get:
+
+  $$
+  \frac{\partial \text{loss}}{\partial b_{\text{final}}} = \frac{\partial \text{loss}}{\partial \text{output}} \cdot \frac{\partial \text{output}}{\partial \text{input\_to\_final\_relu}} \cdot \frac{\partial \text{input\_to\_final\_relu}}{\partial b_{\text{final}}} = 32.02 \cdot 1 \cdot 1 = 32.02
+  $$
+
+  Therefore, the gradient of the loss with respect to $ b_{\text{final}} $ is:
+
+  $$
+  \frac{\partial \text{loss}}{\partial b_{\text{final}}} = 32.02
+  $$
+  
+  </TabItem>
+  <TabItem value="F(1.)=0." label="F(1.)=0.">
+  
+  Substituting the values:
+
+  $$
+  \frac{\partial \text{loss}}{\partial \text{output}} = 2 \cdot (0 - 0) = 0
+  $$
+
+  Since $ \text{input\_to\_final\_relu} = 0 $, which is equal to 0:
+  
+  $$
+  \frac{\partial \text{output}}{\partial \text{input\_to\_final\_relu}} = 0
+  $$
+
+  Combining these, we get:
+
+  $$
+  \frac{\partial \text{loss}}{\partial b_{\text{final}}} = \frac{\partial \text{loss}}{\partial \text{output}} \cdot \frac{\partial \text{output}}{\partial \text{input\_to\_final\_relu}} \cdot \frac{\partial \text{input\_to\_final\_relu}}{\partial b_{\text{final}}} = 0 \cdot 0 \cdot 1 = 0
+  $$
+
+  Therefore, the gradient of the loss with respect to $ b_{\text{final}} $ is:
+
+  $$
+  \frac{\partial \text{loss}}{\partial b_{\text{final}}} = 0
+  $$
+
+  </TabItem>
+</Tabs>
+
+### 4. Update Parameters 
+    
+Using the <ins>**loss value accumulated with all three data**</ins>, the gradient, the optimizer, and the learning rate( `learning_rate` = $\eta=0.1$ ), determine how much the model parameters should be adjusted (in our example, it is $b_{\text{final}}$ being adjusted).
+
+In this case, we use Stochastic Gradient Descent(SGD) as our optimization algorithm, which updates the parameter $ b_{\text{final}} $ as follows:
+
+$$
+\text{updated\_} b_{\text{final}} = b_{\text{final}} - \text{learning rate} \times \sum_{i=1}^{n} \frac{\partial \text{loss}}{\partial b_{\text{final}}}
+$$
+
+$n$ represents the number of batches. In this example, we have 3 batches (although each batch contains only 1 data point, this is specified to avoid confusion). After going through all the batches in one epoch, we update the parameters once.
+
+Therefore, substituting the values:
+
+  $$
+  \text{updated\_} b_{\text{final}} = 0 - 0.1 \times (0 + 32.02 + 0) = -3.202
+  $$
+
+Through *Figure. 8*, we can see that with each epoch, the loss **decreases** as $b_{final}$ is adjusted. 
+
+<p align="center">
+  <Image img={require('../assets/computer-science/Loss-Curve.png')} style={{width: 500}} />
+  <em>Figure 8. Loss Curve.</em>
+</p>
+
+Additionally, from *Figure. 9*, we can observe that $b_{final}$ gradually approaches the preset value of `-16`, eventually adjusting to `-16.01`.
+
+<p align="center">
+  <Image img={require('../assets/computer-science/b-final-adjusted-process.png')} style={{width: 500}} />
+  <em>  
+    Figure 9. Parameter b<sub>final</sub> Adjusted Process.
+  </em>
+</p>
+
+### References
+
+<a id="ref-1"></a> 1. StatQuest with Josh Starmer. (2022). The StatQuest Introduction to PyTorch [Video]. YouTube. https://youtu.be/FHdlXe1bSe4?si=jKpR6qk2DGrDICpA
+
 
 
 
