@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkliuyuweitarek=self.webpackChunkliuyuweitarek||[]).push([[5194],{872:e=>{e.exports=JSON.parse('{"permalink":"/blog/tags/introduction","page":1,"postsPerPage":5,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}')}}]);

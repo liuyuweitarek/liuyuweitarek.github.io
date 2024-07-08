@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkliuyuweitarek=self.webpackChunkliuyuweitarek||[]).push([[5512],{4352:e=>{e.exports=JSON.parse('{"title":"Recent posts","items":[{"title":"Hello, world.","permalink":"/blog/hello-world","unlisted":false}]}')}}]);

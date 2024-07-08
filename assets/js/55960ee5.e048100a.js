@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkliuyuweitarek=self.webpackChunkliuyuweitarek||[]).push([[4296],{2416:a=>{a.exports=JSON.parse('[{"label":"Manual","permalink":"/docs/tags/manual","count":3},{"label":"Machine-Learning","permalink":"/docs/tags/machine-learning","count":1},{"label":"Psychology","permalink":"/docs/tags/psychology","count":1}]')}}]);
