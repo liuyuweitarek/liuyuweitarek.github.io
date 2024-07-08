@@ -56,7 +56,7 @@ const Notes: Note[] = [
     description: 'Implement neural network and simulate the all-or-none laws.',
     preview: require('./images/Simulate-a-neuron-with-PyTorch.png'),
     website: './ComputerScience/simulate-a-neuron-with-pytorch',
-    source: 'https://colab.research.google.com/drive/1_Qy1WdfnL1dPLt_022MUn6tHo0RTGExo?usp=sharing',
+    source: 'https://colab.research.google.com/drive/1x36lSmRdi8dOPkjzhhjuF8AZbnQWOnzl?usp=sharing',
     tags: ['implementation', 'computer-science'],
   }
 ];
