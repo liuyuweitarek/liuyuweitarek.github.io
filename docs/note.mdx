@@ -8,7 +8,7 @@ last_update:
   date: 6/24/2024
   author: Tarek Liu
 ---
-
+import GitHubButton from 'react-github-btn'
 import Link from '@docusaurus/Link';
 import SponsorIcon from '@site/src/components/common/SponsorIcon';
 import ArrowRight from '@site/static/icons/arrow_right.svg';
@@ -48,8 +48,11 @@ import SVM from '@site/static/icons/svm.svg';
         <br />
         P.S. This content was produced in collaboration with ChatGPT. View prompt in references.<sup>[4](#ref-4)</sup>{' '}
         <br />
-        If you find my content helpful, buying me a coffee is the greatest encouragement!{' '}
-        <SponsorIcon message="Buy mememe" sponsor_url="https://www.buymeacoffee.com/liuyuweitarek"/>{' '}
+        If you find my content helpful, buying me a coffee or giving a star would be the greatest encouragement, and I would be very grateful for your support!{' '}
+        <div class="overview-icons-container">{' '}
+          <div><GitHubButton href="https://github.com/liuyuweitarek/liuyuweitarek.github.io" data-color-scheme="no-preference: dark; light: light; dark: dark;" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star liuyuweitarek/liuyuweitarek.github.io on GitHub">Star</GitHubButton></div>{' '}
+          <div><SponsorIcon message="Buy mememe" sponsor_url="https://www.buymeacoffee.com/liuyuweitarek"/></div>{' '}
+        </div>
       </p>
       <iframe 
         width="560" 

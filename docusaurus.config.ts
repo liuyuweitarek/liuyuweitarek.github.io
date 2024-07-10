@@ -40,6 +40,12 @@ const config: Config = {
     //   serviceName: "Mailchimp",
     // },
   },
+  scripts: [
+    {
+      src: "https://buttons.github.io/buttons.js",
+      async: true
+    },
+  ],
   plugins: [
     "docusaurus-plugin-sass",
     [
@@ -250,12 +256,17 @@ const config: Config = {
           items: [
             {
               html: `
+              <iframe src="https://ghbtns.com/github-btn.html?user=liuyuweitarek&repo=liuyuweitarek.github.io&type=star&count=true&size=large" frameborder="0" scrolling="0" width="170" height="30" title="GitHub"></iframe>
+              `
+            },
+            {
+              html: `
                 <a href="https://www.buymeacoffee.com/liuyuweitarek" target="_blank">
                   <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" >
                 </a>
               `,
-            },
-          ]
+            }
+            ]
         }
       ],
       copyright: `All content copyright © 2021-${new Date().getFullYear()} <a href="https://github.com/liuyuweitarek" target="_blank">Tarek Liu</a>. All rights reserved.<br/>The web page uses the <a href="https://github.com/liuyuweitarek/liuyuweitarek.github.io/blob/main/LICENSE_PAGE_TEMPLATE.md" target="_blank">MIT License</a> licensed template <a href="https://github.com/pkosiec/website" target="_blank">pkosiec/website</a>. `,
