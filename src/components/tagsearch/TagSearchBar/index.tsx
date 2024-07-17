@@ -5,11 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import {type ReactNode} from 'react';
-import {translate} from '@docusaurus/Translate';
-import {useSearchName} from '../_utils';
-import styles from '@site/src/components/tagsearch/TagSearchBar/styles.module.css';
-import React from 'react';
+import { type ReactNode } from "react";
+import { translate } from "@docusaurus/Translate";
+import { useSearchName } from "../_utils";
+import styles from "@site/src/components/tagsearch/TagSearchBar/styles.module.css";
+import React from "react";
 
 export default function TagSearchBar(): ReactNode {
   const [searchName, setSearchName] = useSearchName();
@@ -17,8 +17,8 @@ export default function TagSearchBar(): ReactNode {
     <div className={styles.searchBar}>
       <input
         placeholder={translate({
-          message: 'Search for site name...',
-          id: 'tagsearch.searchBar.placeholder',
+          message: "Search for site name...",
+          id: "tagsearch.searchBar.placeholder",
         })}
         value={searchName}
         onInput={(e) => {

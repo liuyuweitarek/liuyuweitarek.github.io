@@ -5,7 +5,6 @@ import Talk, { TalkMetadata } from "../components/talks/Talk";
 
 import DiscoveringIntentBasedChatbot from "./assets/talks/_discovering-intent-based-chatbot.md";
 
-
 const talks: TalkMetadata[] = [
   {
     title: "Discovering Intent-based Chatbot: Powered by the Rasa Framework",
@@ -16,7 +15,7 @@ const talks: TalkMetadata[] = [
         location: "Taipei, Taiwan",
         date: new Date(2022, 9, 15),
       },
-    ]
+    ],
   },
   // {
   //   title: "GraphQL in Go",

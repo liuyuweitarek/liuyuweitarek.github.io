@@ -18,9 +18,9 @@ const sidebars = {
   myLinksSidebar: [
     // External link
     {
-      type: 'link',
-      label: 'Facebook', // The link label
-      href: 'https://facebook.com', // The external URL
+      type: "link",
+      label: "Facebook", // The link label
+      href: "https://facebook.com", // The external URL
     },
 
     // Internal link

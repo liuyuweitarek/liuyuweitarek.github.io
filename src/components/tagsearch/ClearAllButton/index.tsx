@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, {type ReactNode} from 'react';
-import {useClearQueryString} from '@docusaurus/theme-common';
+import React from "react";
+import { useClearQueryString } from "@docusaurus/theme-common";
 
 export default function ClearAllButton(): JSX.Element {
   const clearQueryString = useClearQueryString();
@@ -15,7 +15,8 @@ export default function ClearAllButton(): JSX.Element {
     <button
       className="button button--outline button--primary"
       type="button"
-      onClick={() => clearQueryString()}>
+      onClick={() => clearQueryString()}
+    >
       Clear All
     </button>
   );

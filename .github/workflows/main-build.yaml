@@ -25,24 +25,24 @@ jobs:
         with:
           node-version: 20.x
           cache: npm
-      
+
       - name: Install dependencies
         run: npm install
-      
+
       - name: Create .env file
         uses: ozaytsev86/create-env-file@v1
         with:
           ENV_APPLICATION_ID: ${{ secrets.APPLICATION_ID }}
           ENV_API_KEY: ${{ secrets.API_KEY }}
           ENV_INDEX_NAME: ${{ secrets.INDEX_NAME }}
-      
+
       - name: Build website
         run: npm run build
-      
+
       - name: Create .nojekyll file for GitHub Pages
         run: |
           mkdir -p build/test-site/ && touch -f build/test-site/.nojekyll
-      
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
@@ -50,7 +50,7 @@ jobs:
           publish_dir: ./build
           user_name: liuyuweitarek
           user_email: liuyuwei.tarek@gmail.com
-      
+
       - name: Get the content of algolia.json as config
         id: algolia_config
         run: echo "config=$(cat ./algolia/prod-algolia-config.json | jq -r tostring)" >> $GITHUB_OUTPUT

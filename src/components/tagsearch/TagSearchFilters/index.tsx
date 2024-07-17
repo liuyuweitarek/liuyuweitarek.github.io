@@ -5,37 +5,42 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-import type {ReactNode, CSSProperties} from 'react';
-import clsx from 'clsx';
-import Translate from '@docusaurus/Translate';
-import FavoriteIcon from '../FavoriteIcon';
-import {Tags, TagList, type TagType} from '../../../data/notes';
-import Heading from '@theme/Heading';
-import TagSearchTagSelect from '../TagSearchTagSelect';
-import OperatorButton from '../OperatorButton';
-import ClearAllButton from '../ClearAllButton';
-import {useFilteredNotes, useSiteCountPlural} from '../_utils';
+import React from "react";
+import type { ReactNode, CSSProperties } from "react";
+import clsx from "clsx";
+import Translate from "@docusaurus/Translate";
+import FavoriteIcon from "../FavoriteIcon";
+import { Tags, TagList, type TagType } from "../../../data/notes";
+import Heading from "@theme/Heading";
+import TagSearchTagSelect from "../TagSearchTagSelect";
+import OperatorButton from "../OperatorButton";
+import ClearAllButton from "../ClearAllButton";
+import { useFilteredNotes, useSiteCountPlural } from "../_utils";
 
-import styles from '@site/src/components/tagsearch/TagSearchFilters/styles.module.css';
+import styles from "@site/src/components/tagsearch/TagSearchFilters/styles.module.css";
 
-
-function TagCircleIcon({color, style}: {color: string; style?: CSSProperties}) {
+function TagCircleIcon({
+  color,
+  style,
+}: {
+  color: string;
+  style?: CSSProperties;
+}) {
   return (
     <span
       style={{
         backgroundColor: color,
         width: 10,
         height: 10,
-        borderRadius: '50%',
+        borderRadius: "50%",
         ...style,
       }}
     />
   );
 }
 
-function TagSearchListItem({tag}: {tag: TagType}) {
-  const {label, description, color} = Tags[tag];
+function TagSearchListItem({ tag }: { tag: TagType }) {
+  const { label, description, color } = Tags[tag];
   return (
     <li className={styles.tagListItem}>
       <TagSearchTagSelect
@@ -43,8 +48,8 @@ function TagSearchListItem({tag}: {tag: TagType}) {
         label={label}
         description={description}
         icon={
-          tag === 'implementation' ? (
-            <FavoriteIcon size="small" style={{marginLeft: 8}} />
+          tag === "implementation" ? (
+            <FavoriteIcon size="small" style={{ marginLeft: 8 }} />
           ) : (
             <TagCircleIcon
               color={color}
@@ -62,7 +67,7 @@ function TagSearchListItem({tag}: {tag: TagType}) {
 
 function TagSearchTagList() {
   return (
-    <ul className={clsx('clean-list', styles.tagList)}>
+    <ul className={clsx("clean-list", styles.tagList)}>
       {TagList.map((tag) => {
         return <TagSearchListItem key={tag} tag={tag} />;
       })}
@@ -85,7 +90,7 @@ function HeadingText() {
 
 function HeadingButtons() {
   return (
-    <div className={styles.headingButtons} style={{alignItems: 'center'}}>
+    <div className={styles.headingButtons} style={{ alignItems: "center" }}>
       <OperatorButton />
       <ClearAllButton />
     </div>
@@ -94,7 +99,7 @@ function HeadingButtons() {
 
 function HeadingRow() {
   return (
-    <div className={clsx('margin-bottom--sm', styles.headingRow)}>
+    <div className={clsx("margin-bottom--sm", styles.headingRow)}>
       <HeadingText />
       <HeadingButtons />
     </div>

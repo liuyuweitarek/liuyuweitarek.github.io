@@ -3,22 +3,23 @@ id: simulate-a-neuron-with-pytorch
 title: Simulate a neuron with PyTorch
 hide_title: true
 sidebar_position: 3
-tags: ['pytorch', 'implementation', 'deep-learning', 'computer-science']
+tags: ["pytorch", "implementation", "deep-learning", "computer-science"]
 draft: false
 last_update:
   date: 12/2/2022
   author: Tarek Liu
 ---
-import Image from '@theme/IdealImage';
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-import SimpleNeuron from '../assets/computer-science/Simple-Neuron.png';
-import GroundTruthResponse from '../assets/computer-science/Simple-Neuron-Network-Real-World.png';
+
+import Image from "@theme/IdealImage";
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+import SimpleNeuron from "../assets/computer-science/Simple-Neuron.png";
+import GroundTruthResponse from "../assets/computer-science/Simple-Neuron-Network-Real-World.png";
 
 ## Simulate a neuron with PyTorch
 
 This note followed [Josh's awesome video](https://youtu.be/FHdlXe1bSe4?si=jKpR6qk2DGrDICpA)<sup>[1](#ref-1)</sup> to implement a neural network simulating the all-or-none law of action potentials using pytorch. Additionally, to understand the computations behind the training, I have organized the "computation process" and "source code verification" in this note.
- 
+
 You can play with your own data in [my Google Colab Playground](https://colab.research.google.com/drive/1x36lSmRdi8dOPkjzhhjuF8AZbnQWOnzl?usp=sharing).
 
 :::info[Announcement: Not Original Content]
@@ -36,11 +37,10 @@ The human brain is composed of hundreds of billions of nerve cells, also known a
 Below is a neuron look like:
 
 <p align="center">
-  <img src={SimpleNeuron.src} alt="simple-neuron"/>
-  <br/>
+  <img src={SimpleNeuron.src} alt="simple-neuron" />
+  <br />
   <em>Figure 1. A neuron.</em>
 </p>
-
 
 #### All-or-none Law
 
@@ -56,18 +56,23 @@ Here is a diagram showing the relationship between electrical stimulation (X) an
           |                       |        |
           |                       |        |
           |_______________________|        |______________
-          |      |      |      |      |      |      |  
+          |      |      |      |      |      |      |
           |______|______|______|______|______|______|______\ X (Doses)
-                                                           / 
+                                                           /
 
 ```
-<p align="center"><i>Figure 2. Effectiveness vs. Dose Relationship</i></p>
+
+<p align="center">
+  <i>Figure 2. Effectiveness vs. Dose Relationship</i>
+</p>
 ### Implement a Neuron-like network with PyTorch
 
 Assume the structure below is the neuron in the real world.
 
 <p align="center">
-  <Image img={require('../assets/computer-science/Simple-Neuron-Network-Real-World.png')} />
+  <Image
+    img={require("../assets/computer-science/Simple-Neuron-Network-Real-World.png")}
+  />
   <em>Figure 3. Assumption ground truth of neuron network.</em>
 </p>
 
@@ -145,7 +150,10 @@ plt.xlabel("Doses")
 The results seem to align with our expectations!
 
 <p align="center">
-  <Image img={require('../assets/computer-science/Response-Real-World.png')} style={{width: 500}} />
+  <Image
+    img={require("../assets/computer-science/Response-Real-World.png")}
+    style={{ width: 500 }}
+  />
   <em>Figure 4. Response of the ground truth.</em>
 </p>
 
@@ -166,7 +174,7 @@ class BasicNN_train(nn.Module):
 
     # Final bias
     # Edit here
-    self.b_final = nn.Parameter(torch.tensor(0.00), requires_grad=True) 
+    self.b_final = nn.Parameter(torch.tensor(0.00), requires_grad=True)
 
   def forward(self, input_value):
     '''Define the forward pass.'''
@@ -176,7 +184,10 @@ class BasicNN_train(nn.Module):
 Now, the spikes of this neuron network look like below.
 
 <p align="center">
-  <Image img={require('../assets/computer-science/Response-Untrained.png')} style={{width: 500}}/>
+  <Image
+    img={require("../assets/computer-science/Response-Untrained.png")}
+    style={{ width: 500 }}
+  />
   <em>Figure 5. Response of the untrained model.</em>
 </p>
 
@@ -224,7 +235,10 @@ for epoch in range(100):
 The responses of the trained model look like below:
 
 <p align="center">
-  <Image img={require('../assets/computer-science/Response-Trained.png')} style={{width: 500}}/>
+  <Image
+    img={require("../assets/computer-science/Response-Trained.png")}
+    style={{ width: 500 }}
+  />
   <em>Figure 6. Response of the trained model.</em>
 </p>
 
@@ -236,22 +250,23 @@ The training process was repeated 100 times (Epoch = 100). In each training sess
 
 Here, I will calculate the process for `Epoch = 1` and show the results for all epochs at the end.
 
-You can click on the corresspond data tab to view each data's calculations and verifications for each step. 
+You can click on the corresspond data tab to view each data's calculations and verifications for each step.
 
 <div align="center">
 
-||F(0.)=0.|F(0.5)=1.|F(1.)=0.|
-|:--|:--:|:--:|:--:|
-|Stimuli(X)|0.|0.5|1.|
-|Response(Y)|0.|1.|0.|
+|             | F(0.)=0. | F(0.5)=1. | F(1.)=0. |
+| :---------- | :------: | :-------: | :------: |
+| Stimuli(X)  |    0.    |    0.5    |    1.    |
+| Response(Y) |    0.    |    1.     |    0.    |
 
 </div>
 
-### 1. Forward Process 
-    
+### 1. Forward Process
+
 The data flows through the tensor to compute the **Predict Value**, which denoted as $\^{Y}$.
 
 #### Rectified Linear Unit, ReLU
+
 Before forward process, we need to understand how the ReLU function operates:
 
 $$
@@ -261,10 +276,10 @@ $$
 or,
 
 $$
-\text{ReLU}(x) = 
-\begin{cases} 
+\text{ReLU}(x) =
+\begin{cases}
 0 & \text{if } x \leq 0 \\
-x & \text{if } x > 0 
+x & \text{if } x > 0
 \end{cases}
 $$
 
@@ -273,22 +288,23 @@ ReLU is computationally efficient, as it only needs to determine whether the inp
 Let's get started!
 
 <p align="center">
-    <Image img={require('../assets/computer-science/b-final-1.png')} />
-    <em>
-      Figure 7. Neuron network before input F(0.), b_<sub>final</sub> = 0.
-    </em>
-  </p>
+  <Image img={require("../assets/computer-science/b-final-1.png")} />
+  <em>
+    Figure 7. Neuron network before input F(0.), b_<sub>final</sub> = 0.
+  </em>
+</p>
 
 <Tabs groupId="input-observed-data">
   <TabItem value="F(0.)=0." label="F(0.)=0.">
 
-  $ Given \ that $
-  $$
-  \begin{align*}
-  Stimili(X)&=0. \\ 
-  Response(Y)&=0. \\
-  \end{align*}
-  $$
+$ Given \ that $
+
+$$
+\begin{align*}
+Stimili(X)&=0. \\
+Response(Y)&=0. \\
+\end{align*}
+$$
 
   <h4>Top Path:</h4>
   
@@ -306,195 +322,195 @@ Let's get started!
 
   \text{scaled\_top\_relu\_output} & = \text{top\_relu\_output} \times w_{10} \\
 
-  & = 0 \times (-40.8) \\ 
+  & = 0 \times (-40.8) \\
   & = 0 \\
   \end{align*}
   $$
-  
-  <h4>Bottom Path:</h4>
-  
-  $$
+
+<h4>Bottom Path:</h4>
+
+$$
   \begin{align*}
   \text{input\_to\_bottom\_relu} & = \text{input\_value} \times w_{01} + b_{01} \\
-  & = 0 \times 12.6 + 0.00 \\ 
-  & = 0 \\
+& = 0 \times 12.6 + 0.00 \\
+& = 0 \\
 
   \text{bottom\_relu\_output} & = \text{ReLU}(\text{input\_to\_bottom\_relu}) \\
-  & = \text{ReLU}(0) \\ 
-  & = 0 \\
-  
+& = \text{ReLU}(0) \\
+& = 0 \\
+
   \text{scaled\_bottom\_relu\_output} & = \text{bottom\_relu\_output} \times w_{11} \\
-  & = 0 \times 2.7 \\ 
-  & = 0 \\
-  
+& = 0 \times 2.7 \\
+& = 0 \\
+
   \end{align*}
-  $$
-  
-  <h4>Final Bias:</h4>
-  
-  $$
+$$
+
+<h4>Final Bias:</h4>
+
+$$
   \begin{align*}
   \text{input\_to\_final\_relu} & = \text{scaled\_top\_relu\_output} + \text{scaled\_bottom\_relu\_output} + b_{\text{final}} \\
 
-  & = 0 + 0 + (0) \\
-  & = 0 \\
+& = 0 + 0 + (0) \\
+& = 0 \\
 
   \text{output} & = \text{ReLU}(\text{input\_to\_final\_relu}) \\
 
-  & = \text{ReLU}(0) \\
-  &= 0 \\
+& = \text{ReLU}(0) \\
+&= 0 \\
 
-  \hat{Y} & = \text{output} = 0
+\hat{Y} & = \text{output} = 0
 
   \end{align*}
-  $$
-  
-  </TabItem>
-  <TabItem value="F(0.5)=1." label="F(0.5)=1.">
-  $ Given \ that $
-  
-  $$
-  \begin{align*}
-  Stimili(X)&=0.5 \\ 
-  Response(Y)&=1 \\
-  \end{align*}
-  $$
+$$
+
+</TabItem>
+<TabItem value="F(0.5)=1." label="F(0.5)=1.">
+$ Given \ that $
+
+$$
+\begin{align*}
+Stimili(X)&=0.5 \\
+Response(Y)&=1 \\
+\end{align*}
+$$
 
   <h4>Top Path:</h4>
-  
-  $$
+
+$$
   \begin{align*}
   \text{input\_to\_top\_relu} & = \text{input\_value} \times w_{00} + b_{00} \\
-  
-  & = 0.5 \times 1.7 + (-0.85) \\
-  &= 0 \\
-  
+
+& = 0.5 \times 1.7 + (-0.85) \\
+&= 0 \\
+
   \text{top\_relu\_output} & = \text{ReLU}(\text{input\_to\_top\_relu}) \\
-  
-  & = \text{ReLU}(0) \\
-  & = 0 \\
+
+& = \text{ReLU}(0) \\
+& = 0 \\
 
   \text{scaled\_top\_relu\_output} & = \text{top\_relu\_output} \times w_{10} \\
 
-  & = 0 \times (-40.8) \\ 
-  & = 0 \\
+& = 0 \times (-40.8) \\
+& = 0 \\
   \end{align*}
-  $$
-  
-  <h4>Bottom Path:</h4>
-  
-  $$
+$$
+
+<h4>Bottom Path:</h4>
+
+$$
   \begin{align*}
   \text{input\_to\_bottom\_relu} & = \text{input\_value} \times w_{01} + b_{01} \\
-  & = 0.5 \times 12.6 + 0.00 \\ 
-  & = 6.3 \\
+& = 0.5 \times 12.6 + 0.00 \\
+& = 6.3 \\
 
   \text{bottom\_relu\_output} & = \text{ReLU}(\text{input\_to\_bottom\_relu}) \\
-  & = \text{ReLU}(6.3) \\ 
-  & = 6.3 \\
-  
+& = \text{ReLU}(6.3) \\
+& = 6.3 \\
+
   \text{scaled\_bottom\_relu\_output} & = \text{bottom\_relu\_output} \times w_{11} \\
-  & = 6.3 \times 2.7 \\ 
-  & = 17.01 \\
-  
+& = 6.3 \times 2.7 \\
+& = 17.01 \\
+
   \end{align*}
-  $$
-  
-  <h4>Final Bias:</h4>
-  
-  $$
+$$
+
+<h4>Final Bias:</h4>
+
+$$
   \begin{align*}
   \text{input\_to\_final\_relu} & = \text{scaled\_top\_relu\_output} + \text{scaled\_bottom\_relu\_output} + b_{\text{final}} \\
 
-  & = 0 + 17.01 + (0) \\
-  & = 17.01 \\
+& = 0 + 17.01 + (0) \\
+& = 17.01 \\
 
   \text{output} & = \text{ReLU}(\text{input\_to\_final\_relu}) \\
 
-  & = \text{ReLU}(17.01) \\
-  &= 17.01 \\
+& = \text{ReLU}(17.01) \\
+&= 17.01 \\
 
-  \hat{Y} & = \text{output} = 17.01
+\hat{Y} & = \text{output} = 17.01
 
   \end{align*}
-  $$
-  </TabItem>
-  <TabItem value="F(1.)=0." label="F(1.)=0.">
-  
-  $ Given \ that $
-  $$
-  \begin{align*}
-  Stimili(X)&=1 \\ 
-  Response(Y)&=0 \\
-  \end{align*}
-  $$
+$$
+</TabItem>
+<TabItem value="F(1.)=0." label="F(1.)=0.">
+
+$ Given \ that $
+$$
+\begin{align*}
+Stimili(X)&=1 \\
+Response(Y)&=0 \\
+\end{align*}
+$$
 
   <h4>Top Path:</h4>
-  
-  $$
+
+$$
   \begin{align*}
   \text{input\_to\_top\_relu} & = \text{input\_value} \times w_{00} + b_{00} \\
-  
-  & = 1 \times 1.7 + (-0.85) \\
-  &= 0.85 \\
-  
+
+& = 1 \times 1.7 + (-0.85) \\
+&= 0.85 \\
+
   \text{top\_relu\_output} & = \text{ReLU}(\text{input\_to\_top\_relu}) \\
-  
-  & = \text{ReLU}(0.85) \\
-  & = 0.85 \\
+
+& = \text{ReLU}(0.85) \\
+& = 0.85 \\
 
   \text{scaled\_top\_relu\_output} & = \text{top\_relu\_output} \times w_{10} \\
 
-  & = 0.85 \times (-40.8) \\ 
-  & = -34.68 \\
+& = 0.85 \times (-40.8) \\
+& = -34.68 \\
   \end{align*}
-  $$
-  
-  <h4>Bottom Path:</h4>
-  
-  $$
+$$
+
+<h4>Bottom Path:</h4>
+
+$$
   \begin{align*}
   \text{input\_to\_bottom\_relu} & = \text{input\_value} \times w_{01} + b_{01} \\
-  & = 1 \times 12.6 + 0.00 \\ 
-  & = 12.6 \\
+& = 1 \times 12.6 + 0.00 \\
+& = 12.6 \\
 
   \text{bottom\_relu\_output} & = \text{ReLU}(\text{input\_to\_bottom\_relu}) \\
-  & = \text{ReLU}(12.6) \\ 
-  & = 12.6 \\
-  
+& = \text{ReLU}(12.6) \\
+& = 12.6 \\
+
   \text{scaled\_bottom\_relu\_output} & = \text{bottom\_relu\_output} \times w_{11} \\
-  & = 12.6 \times 2.7 \\ 
-  & = 34.02 \\
-  
+& = 12.6 \times 2.7 \\
+& = 34.02 \\
+
   \end{align*}
-  $$
-  
-  <h4>Final Bias:</h4>
-  
-  $$
+$$
+
+<h4>Final Bias:</h4>
+
+$$
   \begin{align*}
   \text{input\_to\_final\_relu} & = \text{scaled\_top\_relu\_output} + \text{scaled\_bottom\_relu\_output} + b_{\text{final}} \\
 
-  & = -34.68 + 34.02 + (0) \\
-  & = -0.66 \\
+& = -34.68 + 34.02 + (0) \\
+& = -0.66 \\
 
   \text{output} & = \text{ReLU}(\text{input\_to\_final\_relu}) \\
 
-  & = \text{ReLU}(-0.66) \\
-  &= 0 \\
+& = \text{ReLU}(-0.66) \\
+&= 0 \\
 
-  \hat{Y} & = \text{output} = 0
+\hat{Y} & = \text{output} = 0
 
   \end{align*}
-  $$
-  </TabItem>
+$$
+</TabItem>
 </Tabs>
 
 ### 2. Calculating Loss
 
-To compute the loss, we measure the difference between the predicted value and the observed value. 
+To compute the loss, we measure the difference between the predicted value and the observed value.
 
-In this example, we simplify the process by squaring the difference between the predicted value ($\hat{Y}$) and the observed value ($Y$). 
+In this example, we simplify the process by squaring the difference between the predicted value ($\hat{Y}$) and the observed value ($Y$).
 
 The general formula for the loss function in this case is Mean Square Error(MSE):
 
@@ -512,49 +528,49 @@ $$
 
 <Tabs groupId="input-observed-data">
   <TabItem value="F(0.)=0." label="F(0.)=0.">
-  
+
   $\text{Given } \hat{Y} = 0, Response(Y) = 0,$
-  
-  $$
-  \begin{align*}
-  Loss(\hat{Y}, Y) & = (\hat{Y} - Y)^2 \\
-  & = ( 0 - 0 )^2 \\
-  & = 0
-  \end{align*}
-  $$
-  
-  </TabItem>
-  <TabItem value="F(0.5)=1." label="F(0.5)=1.">
-  
-  $\text{Given } \hat{Y} = 17.01., Response(Y) = 1,$
-  
-  $$
-  \begin{align*}
-  Loss(\hat{Y}, Y) & = (\hat{Y} - Y)^2 \\
-  & = ( 17.01 - 1 )^2 \\
-  & = 256.3201
-  \end{align*}
-  $$
+
+$$
+\begin{align*}
+Loss(\hat{Y}, Y) & = (\hat{Y} - Y)^2 \\
+& = ( 0 - 0 )^2 \\
+& = 0
+\end{align*}
+$$
+
+</TabItem>
+<TabItem value="F(0.5)=1." label="F(0.5)=1.">
+
+$\text{Given } \hat{Y} = 17.01., Response(Y) = 1,$
+
+$$
+\begin{align*}
+Loss(\hat{Y}, Y) & = (\hat{Y} - Y)^2 \\
+& = ( 17.01 - 1 )^2 \\
+& = 256.3201
+\end{align*}
+$$
 
   </TabItem>
-  <TabItem value="F(1.)=0." label="F(1.)=0.">
-  
-  $\text{Given } \hat{Y} = 0, Response(Y) = 0,$
-  
-  $$
-  \begin{align*}
-  Loss(\hat{Y}, Y) & = (\hat{Y} - Y)^2 \\
-  & = ( 0 - 0 )^2 \\
-  & = 0
-  \end{align*}
-  $$
-  
-  </TabItem>
+<TabItem value="F(1.)=0." label="F(1.)=0.">
+
+$\text{Given } \hat{Y} = 0, Response(Y) = 0,$
+
+$$
+\begin{align*}
+Loss(\hat{Y}, Y) & = (\hat{Y} - Y)^2 \\
+& = ( 0 - 0 )^2 \\
+& = 0
+\end{align*}
+$$
+
+</TabItem>
 </Tabs>
 
-### 3. Backward Process 
-    
-Compute the gradient, which is the "direction" in which the parameters should be adjusted next. 
+### 3. Backward Process
+
+Compute the gradient, which is the "direction" in which the parameters should be adjusted next.
 
 Our training parameter is $b_{final}$; therefore, we need to calculate:
 
@@ -571,109 +587,109 @@ $$
 Calculate the gradient of the loss with respect to $ b_{\text{final}} $:
 
 - **Partial derivative of the loss with respect to the output:**
-  $$
+$$
   \frac{\partial \text{loss}}{\partial \text{output}} = 2 \cdot (\text{output} - \text{response\_value})
-  $$
+$$
 
 - **Partial derivative of the output with respect to the input to the final ReLU:**
-  $$
+$$
   \frac{\partial \text{output}}{\partial \text{input\_to\_final\_relu}} = 
-  \begin{cases} 
+\begin{cases}
   1 & \text{if } \text{input\_to\_final\_relu} > 0 \\
   0 & \text{if } \text{input\_to\_final\_relu} \leq 0 
-  \end{cases}
-  $$
+\end{cases}
+$$
 
 - **Partial derivative of the input to the final ReLU with respect to $ b_{\text{final}} $:**
-  $$
+$$
   \frac{\partial \text{input\_to\_final\_relu}}{\partial b_{\text{final}}} = 1
-  $$
+$$
 
 <Tabs groupId="input-observed-data">
-  <TabItem value="F(0.)=0." label="F(0.)=0.">
-  Substituting the values:
+<TabItem value="F(0.)=0." label="F(0.)=0.">
+Substituting the values:
 
-  $$
-  \frac{\partial \text{loss}}{\partial \text{output}} = 2 \cdot (0 - 0) = 0
-  $$
+$$
+\frac{\partial \text{loss}}{\partial \text{output}} = 2 \cdot (0 - 0) = 0
+$$
 
   Since $ \text{input\_to\_final\_relu} = 0 $, which is equal to 0:
-  
-  $$
+
+$$
   \frac{\partial \text{output}}{\partial \text{input\_to\_final\_relu}} = 0
-  $$
+$$
 
   Combining these, we get:
 
-  $$
+$$
   \frac{\partial \text{loss}}{\partial b_{\text{final}}} = \frac{\partial \text{loss}}{\partial \text{output}} \cdot \frac{\partial \text{output}}{\partial \text{input\_to\_final\_relu}} \cdot \frac{\partial \text{input\_to\_final\_relu}}{\partial b_{\text{final}}} = 0 \cdot 0 \cdot 1 = 0
-  $$
+$$
 
   Therefore, the gradient of the loss with respect to $ b_{\text{final}} $ is:
 
-  $$
+$$
   \frac{\partial \text{loss}}{\partial b_{\text{final}}} = 0
-  $$
+$$
 
   </TabItem>
-  <TabItem value="F(0.5)=1." label="F(0.5)=1.">
+<TabItem value="F(0.5)=1." label="F(0.5)=1.">
 
   Substituting the values:
 
-  $$
-  \frac{\partial \text{loss}}{\partial \text{output}} = 2 \cdot (17.01 - 1.0) = 2 \cdot 16.01 = 32.02
-  $$
+$$
+\frac{\partial \text{loss}}{\partial \text{output}} = 2 \cdot (17.01 - 1.0) = 2 \cdot 16.01 = 32.02
+$$
 
   Since $ \text{input\_to\_final\_relu} = 17.01 $, which is greater than 0:
-  
-  $$
+
+$$
   \frac{\partial \text{output}}{\partial \text{input\_to\_final\_relu}} = 1
-  $$
+$$
 
   Combining these, we get:
 
-  $$
+$$
   \frac{\partial \text{loss}}{\partial b_{\text{final}}} = \frac{\partial \text{loss}}{\partial \text{output}} \cdot \frac{\partial \text{output}}{\partial \text{input\_to\_final\_relu}} \cdot \frac{\partial \text{input\_to\_final\_relu}}{\partial b_{\text{final}}} = 32.02 \cdot 1 \cdot 1 = 32.02
-  $$
+$$
 
   Therefore, the gradient of the loss with respect to $ b_{\text{final}} $ is:
 
-  $$
+$$
   \frac{\partial \text{loss}}{\partial b_{\text{final}}} = 32.02
-  $$
-  
-  </TabItem>
-  <TabItem value="F(1.)=0." label="F(1.)=0.">
-  
-  Substituting the values:
+$$
 
-  $$
-  \frac{\partial \text{loss}}{\partial \text{output}} = 2 \cdot (0 - 0) = 0
-  $$
+</TabItem>
+<TabItem value="F(1.)=0." label="F(1.)=0.">
+
+Substituting the values:
+
+$$
+\frac{\partial \text{loss}}{\partial \text{output}} = 2 \cdot (0 - 0) = 0
+$$
 
   Since $ \text{input\_to\_final\_relu} = 0 $, which is equal to 0:
-  
-  $$
+
+$$
   \frac{\partial \text{output}}{\partial \text{input\_to\_final\_relu}} = 0
-  $$
+$$
 
   Combining these, we get:
 
-  $$
+$$
   \frac{\partial \text{loss}}{\partial b_{\text{final}}} = \frac{\partial \text{loss}}{\partial \text{output}} \cdot \frac{\partial \text{output}}{\partial \text{input\_to\_final\_relu}} \cdot \frac{\partial \text{input\_to\_final\_relu}}{\partial b_{\text{final}}} = 0 \cdot 0 \cdot 1 = 0
-  $$
+$$
 
   Therefore, the gradient of the loss with respect to $ b_{\text{final}} $ is:
 
-  $$
+$$
   \frac{\partial \text{loss}}{\partial b_{\text{final}}} = 0
-  $$
+$$
 
   </TabItem>
 </Tabs>
 
-### 4. Update Parameters 
-    
+### 4. Update Parameters
+
 Using the <ins>**loss value accumulated with all three data**</ins>, the gradient, the optimizer, and the learning rate( `learning_rate` = $\eta=0.1$ ), determine how much the model parameters should be adjusted (in our example, it is $b_{\text{final}}$ being adjusted).
 
 In this case, we use Stochastic Gradient Descent(SGD) as our optimization algorithm, which updates the parameter $ b_{\text{final}} $ as follows:
@@ -686,24 +702,24 @@ $n$ represents the number of batches. In this example, we have 3 batches (althou
 
 Therefore, substituting the values:
 
-  $$
+$$
   \text{updated\_} b_{\text{final}} = 0 - 0.1 \times (0 + 32.02 + 0) = -3.202
-  $$
+$$
 
-Through *Figure. 8*, we can see that with each epoch, the loss **decreases** as $b_{final}$ is adjusted. 
+Through *Figure. 8*, we can see that with each epoch, the loss **decreases** as $b_{final}$ is adjusted.
 
 <p align="center">
-  <Image img={require('../assets/computer-science/Loss-Curve.png')} style={{width: 500}} />
-  <em>Figure 8. Loss Curve.</em>
+<Image img={require('../assets/computer-science/Loss-Curve.png')} style={{width: 500}} />
+<em>Figure 8. Loss Curve.</em>
 </p>
 
 Additionally, from *Figure. 9*, we can observe that $b_{final}$ gradually approaches the preset value of `-16`, eventually adjusting to `-16.01`.
 
 <p align="center">
-  <Image img={require('../assets/computer-science/b-final-adjusted-process.png')} style={{width: 500}} />
-  <em>  
-    Figure 9. Parameter b<sub>final</sub> Adjusted Process.
-  </em>
+<Image img={require('../assets/computer-science/b-final-adjusted-process.png')} style={{width: 500}} />
+<em>
+  Figure 9. Parameter b<sub>final</sub> Adjusted Process.
+</em>
 </p>
 
 ### References
@@ -713,3 +729,4 @@ Additionally, from *Figure. 9*, we can observe that $b_{final}$ gradually approa
 
 
 
+$$
