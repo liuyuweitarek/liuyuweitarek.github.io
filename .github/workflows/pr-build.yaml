@@ -19,6 +19,7 @@ jobs:
       APPLICATION_ID: ${{ secrets.APPLICATION_ID }}
       API_KEY: ${{ secrets.API_KEY }}
       INDEX_NAME: ${{ secrets.DEV_INDEX_NAME }}
+      SOCKET_SERVER: ${{ secrets.SOCKET_SERVER }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -38,6 +39,7 @@ jobs:
           ENV_APPLICATION_ID: ${{ secrets.APPLICATION_ID }}
           ENV_API_KEY: ${{ secrets.API_KEY }}
           ENV_INDEX_NAME: ${{ secrets.DEV_INDEX_NAME }}
+          ENV_SOCKET_SERVER: ${{ secrets.SOCKET_SERVER }}
 
       - name: Build website
         run: npm run build
