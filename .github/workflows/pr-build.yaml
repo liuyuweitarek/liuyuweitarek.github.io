@@ -12,9 +12,13 @@ jobs:
   build:
     name: Lint and build website
     runs-on: ubuntu-latest
+    environment: github-pages
     permissions:
       contents: read
-
+    env:
+      APPLICATION_ID: ${{ secrets.APPLICATION_ID }}
+      API_KEY: ${{ secrets.API_KEY }}
+      INDEX_NAME: ${{ secrets.DEV_INDEX_NAME }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -27,6 +31,13 @@ jobs:
 
       - name: Lint code
         run: npm run lint
+
+      - name: Create .env file
+        uses: ozaytsev86/create-env-file@v1
+        with:
+          ENV_APPLICATION_ID: ${{ secrets.APPLICATION_ID }}
+          ENV_API_KEY: ${{ secrets.API_KEY }}
+          ENV_INDEX_NAME: ${{ secrets.DEV_INDEX_NAME }}
 
       - name: Build website
         run: npm run build
