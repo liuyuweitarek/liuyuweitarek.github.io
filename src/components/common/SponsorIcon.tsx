@@ -7,13 +7,16 @@ export interface SponsorIconProps {
 }
 
 export const SponsorIcon: FunctionComponent<SponsorIconProps> = ({
-    message,
-    sponsor_url,
+  message,
+  sponsor_url,
 }) => {
-
-    return (
+  return (
     <a href={sponsor_url} target="_blank">
-        <img className={styles.size} src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt={message} />
+      <img
+        className={styles.size}
+        src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
+        alt={message}
+      />
     </a>
   );
 };

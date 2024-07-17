@@ -69,29 +69,29 @@
 }
 
 .chatMessages {
-    flex-grow: 1;
-    overflow-y: auto;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-  
-    // Custom scrollbar styles
-    &::-webkit-scrollbar {
-      width: 6px;
-    }
-  
-    &::-webkit-scrollbar-track {
-      background: #f1f1f1;
-    }
-  
-    &::-webkit-scrollbar-thumb {
-      background: #888;
-      border-radius: 3px;
-    }
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
 
-    &::-webkit-scrollbar-thumb:hover {
-        background: #555;
-      }
+  // Custom scrollbar styles
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
 }
 
 .messageContainer {
@@ -205,15 +205,15 @@
 }
 
 .mCSB_scrollTools {
-    margin: 1px -3px 1px 0;
-    opacity: 0;
+  margin: 1px -3px 1px 0;
+  opacity: 0;
 }
-  
+
 .mCSB_inside > .mCSB_container {
-    margin-right: 0px;
-    padding: 0 10px;
+  margin-right: 0px;
+  padding: 0 10px;
 }
 
 .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
-    background-color: rgba(0, 0, 0, 0.5)!important;
+  background-color: rgba(0, 0, 0, 0.5) !important;
 }

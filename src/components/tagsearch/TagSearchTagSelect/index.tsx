@@ -10,11 +10,11 @@ import React, {
   type ComponentProps,
   type ReactElement,
   useId,
-} from 'react';
-import type {TagType} from '../../../data/notes';
-import {useTags} from '../_utils';
+} from "react";
+import type { TagType } from "../../../data/notes";
+import { useTags } from "../_utils";
 
-import styles from '@site/src/components/tagsearch/TagSearchTagSelect/styles.module.css';
+import styles from "@site/src/components/tagsearch/TagSearchTagSelect/styles.module.css";
 
 function useTagState(tag: string) {
   const [tags, setTags] = useTags();
@@ -30,11 +30,11 @@ function useTagState(tag: string) {
   return [isSelected, toggle] as const;
 }
 
-interface Props extends ComponentProps<'input'> {
+interface Props extends ComponentProps<"input"> {
   tag: TagType;
   label: string;
   description: string;
-  icon: ReactElement<ComponentProps<'svg'>>;
+  icon: ReactElement<ComponentProps<"svg">>;
 }
 
 export default function TagSearchTagSelect({
@@ -55,7 +55,7 @@ export default function TagSearchTagSelect({
         onChange={toggle}
         className="screen-reader-only"
         onKeyDown={(e) => {
-          if (e.key === 'Enter') {
+          if (e.key === "Enter") {
             toggle();
           }
         }}

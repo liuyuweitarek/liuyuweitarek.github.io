@@ -7,7 +7,7 @@ input[type="checkbox"] {
   box-shadow: 0 0 2px 1px var(--ifm-color-secondary-darkest);
 }
 
-input[type='checkbox'] + .checkboxLabel {
+input[type="checkbox"] + .checkboxLabel {
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -34,6 +34,6 @@ input:checked + .checkboxLabel:hover {
   box-shadow: 0 0 2px 1px var(--ifm-color-primary-dark);
 }
 
-html[data-theme='dark'] input:checked + .checkboxLabel {
+html[data-theme="dark"] input:checked + .checkboxLabel {
   background-color: hsl(167deg 56% 73% / 10%);
 }

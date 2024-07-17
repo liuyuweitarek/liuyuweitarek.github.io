@@ -1,9 +1,9 @@
-import React, { FunctionComponent, useState, useEffect, useRef } from 'react';
-import { io, Socket } from 'socket.io-client';
+import React, { FunctionComponent, useState, useEffect, useRef } from "react";
+import { io, Socket } from "socket.io-client";
 import Image from "@theme/IdealImage";
-import UserIcon from "./assets/user-avatar.png"
+import UserIcon from "./assets/user-avatar.png";
 import JubiIcon from "./assets/jubi.png";
-import styles from './ChatBot.module.scss';
+import styles from "./ChatBot.module.scss";
 
 export interface ChatBotProps {
   config: ChatBotConfig;
@@ -14,34 +14,31 @@ export interface ChatBotConfig {
 }
 
 interface Message {
-    sender: 'user' | 'bot';
-    content: string;
-    timestamp?: Date | string;
-  }
+  sender: "user" | "bot";
+  content: string;
+  timestamp?: Date | string;
+}
 
-export const ChatBot: FunctionComponent<ChatBotProps> = ({ config 
-}) => {
-  const { 
-    socket_server, 
-  } = config;
-  
+export const ChatBot: FunctionComponent<ChatBotProps> = ({ config }) => {
+  const { socket_server } = config;
+
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState("");
   const [socket, setSocket] = useState<Socket | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  
+
   const sendMessage = () => {
-    if (inputValue.trim() === '' || !socket) return;
-  
-    const newMessage: Message = { 
-      sender: 'user', 
-      content: inputValue, 
-      timestamp: new Date().toISOString() // Store as ISO string
+    if (inputValue.trim() === "" || !socket) return;
+
+    const newMessage: Message = {
+      sender: "user",
+      content: inputValue,
+      timestamp: new Date().toISOString(), // Store as ISO string
     };
-    setMessages(prevMessages => [...prevMessages, newMessage]);
-    socket.emit('user_uttered', { message: inputValue });
-    setInputValue('');
+    setMessages((prevMessages) => [...prevMessages, newMessage]);
+    socket.emit("user_uttered", { message: inputValue });
+    setInputValue("");
   };
 
   const toggleChat = () => {
@@ -49,29 +46,29 @@ export const ChatBot: FunctionComponent<ChatBotProps> = ({ config
   };
 
   const handleKeyPress = (event: React.KeyboardEvent) => {
-    if (event.key === 'Enter') {
+    if (event.key === "Enter") {
       sendMessage();
     }
   };
 
   useEffect(() => {
     const newSocket = io(socket_server);
-    
-    newSocket.on('connect', () => {
-      console.log('Socket.IO Connected');
+
+    newSocket.on("connect", () => {
+      console.log("Socket.IO Connected");
     });
 
-    newSocket.on('bot_uttered', (data) => {
-        const botMessage: Message = { 
-          sender: 'bot', 
-          content: data.text, 
-          timestamp: new Date().toISOString() // Store as ISO string
-        };
-        setMessages(prevMessages => [...prevMessages, botMessage]);
-      });
+    newSocket.on("bot_uttered", (data) => {
+      const botMessage: Message = {
+        sender: "bot",
+        content: data.text,
+        timestamp: new Date().toISOString(), // Store as ISO string
+      };
+      setMessages((prevMessages) => [...prevMessages, botMessage]);
+    });
 
-    newSocket.on('disconnect', () => {
-      console.log('Socket.IO Disconnected');
+    newSocket.on("disconnect", () => {
+      console.log("Socket.IO Disconnected");
     });
 
     setSocket(newSocket);
@@ -82,24 +79,24 @@ export const ChatBot: FunctionComponent<ChatBotProps> = ({ config
   }, []);
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
-  
+
   const formatTime = (timestamp?: Date | string): string => {
-    if (!timestamp) return '';
-    
+    if (!timestamp) return "";
+
     let date: Date;
-    if (typeof timestamp === 'string') {
+    if (typeof timestamp === "string") {
       date = new Date(timestamp);
     } else {
       date = timestamp;
     }
 
     if (isNaN(date.getTime())) {
-      return ''; // Return empty string if date is invalid
+      return ""; // Return empty string if date is invalid
     }
 
-    return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    return date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
   };
 
   return (
@@ -111,32 +108,35 @@ export const ChatBot: FunctionComponent<ChatBotProps> = ({ config
         <div className={styles.chatWindow}>
           <div className={styles.chatHeader}>
             <h3>Jubi</h3>
-            <button onClick={toggleChat}><span>×</span></button>
+            <button onClick={toggleChat}>
+              <span>×</span>
+            </button>
           </div>
           <div className={styles.chatMessages}>
-          {messages.map((message, index) => (
-            <div key={index} className={`${styles.messageContainer} ${styles[message.sender]}`}>
-              <div className={styles.avatarWrapper}>
-                <Image
-                  img={message.sender === 'user' ? UserIcon : JubiIcon}
-                  alt={message.sender}
-                  className={styles.chatAvatar}
-                />
-              </div>
-              <div className={styles.messageContent}>
-                <div className={styles.message}>
-                  {message.content}
+            {messages.map((message, index) => (
+              <div
+                key={index}
+                className={`${styles.messageContainer} ${styles[message.sender]}`}
+              >
+                <div className={styles.avatarWrapper}>
+                  <Image
+                    img={message.sender === "user" ? UserIcon : JubiIcon}
+                    alt={message.sender}
+                    className={styles.chatAvatar}
+                  />
                 </div>
-                {message.timestamp && (
-                  <div className={styles.messageTime}>
-                    {formatTime(message.timestamp)}
-                  </div>
-                )}
+                <div className={styles.messageContent}>
+                  <div className={styles.message}>{message.content}</div>
+                  {message.timestamp && (
+                    <div className={styles.messageTime}>
+                      {formatTime(message.timestamp)}
+                    </div>
+                  )}
+                </div>
               </div>
-            </div>
-          ))}
-          <div ref={messagesEndRef} />
-        </div>
+            ))}
+            <div ref={messagesEndRef} />
+          </div>
           <div className={styles.inputArea}>
             <input
               type="text"

@@ -5,25 +5,24 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-import type {ReactNode} from 'react';
-import clsx from 'clsx';
-import Translate from '@docusaurus/Translate';
-import {sortedNotes, type Note} from '../../../data/notes';
-import Heading from '@theme/Heading';
-import FavoriteIcon from '../FavoriteIcon';
-import TagSearchCard from '../TagSearchCard';
-import {useFilteredNotes} from '../_utils';
+import React from "react";
+import type { ReactNode } from "react";
+import clsx from "clsx";
+import Translate from "@docusaurus/Translate";
+import { sortedNotes, type Note } from "../../../data/notes";
+import Heading from "@theme/Heading";
+import FavoriteIcon from "../FavoriteIcon";
+import TagSearchCard from "../TagSearchCard";
+import { useFilteredNotes } from "../_utils";
 
-import styles from './styles.module.css';
-
+import styles from "./styles.module.css";
 
 const favoriteNotes = sortedNotes.filter((note) =>
-  note.tags.includes('implementation'),
+  note.tags.includes("implementation"),
 );
 
 const otherNotes = sortedNotes.filter(
-  (note) => !note.tags.includes('implementation'),
+  (note) => !note.tags.includes("implementation"),
 );
 
 function HeadingNoResult() {
@@ -37,8 +36,10 @@ function HeadingNoResult() {
 function HeadingFavorites() {
   return (
     <Heading as="h2" className={styles.headingFavorites}>
-      <Translate id="tagsearch.favoritesList.title">Recent Implementation</Translate>
-      <FavoriteIcon size="large" style={{marginLeft: '1rem'}} />
+      <Translate id="tagsearch.favoritesList.title">
+        Recent Implementation
+      </Translate>
+      <FavoriteIcon size="large" style={{ marginLeft: "1rem" }} />
     </Heading>
   );
 }
@@ -51,11 +52,11 @@ function HeadingAllSites() {
   );
 }
 
-function CardList({heading, items}: {heading?: ReactNode; items: Note[]}) {
+function CardList({ heading, items }: { heading?: ReactNode; items: Note[] }) {
   return (
     <div className="container">
       {heading}
-      <ul className={clsx('clean-list', styles.cardList)}>
+      <ul className={clsx("clean-list", styles.cardList)}>
         {items.map((item) => (
           <TagSearchCard key={item.title} note={item} />
         ))}

@@ -3,7 +3,6 @@ import Footer from "@theme-original/Footer";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import { ChatBot } from "../../components/chatbot/ChatBot";
 
-
 export default function FooterWrapper(props) {
   const { siteConfig } = useDocusaurusContext();
 

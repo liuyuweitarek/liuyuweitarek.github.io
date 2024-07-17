@@ -1,225 +1,225 @@
 # Config
 manual:
-  label: 'Manual'
-  permalink: '/manual'
+  label: "Manual"
+  permalink: "/manual"
   description: "Docs related to the this site's framework."
 
 dev-guide:
-  label: 'Dev Guide'
-  permalink: '/dev-guide'
+  label: "Dev Guide"
+  permalink: "/dev-guide"
   description: "Docs related to the this site's development."
 
 # Property
 implementation:
-  label: 'Implementation'
-  permalink: '/implementation'
+  label: "Implementation"
+  permalink: "/implementation"
   description: "Docs related to implementation details."
 
 analysis:
-  label: 'Analysis'
-  permalink: '/analysis'
+  label: "Analysis"
+  permalink: "/analysis"
   description: "Docs related to the details of hands-on calculation and analysis."
 
 paper-reading:
-  label: 'Paper Reading'
-  permalink: '/paper-reading'
+  label: "Paper Reading"
+  permalink: "/paper-reading"
   description: "Docs related to reading papers."
 
 proof-of-concept:
-  label: 'Proof of Concept'
-  permalink: '/proof-of-concept'
+  label: "Proof of Concept"
+  permalink: "/proof-of-concept"
   description: "Docs related to the project of as proof of concept."
 
 insight:
-  label: 'Insight'
-  permalink: '/insight'
+  label: "Insight"
+  permalink: "/insight"
   description: "Docs related to the insight from all input materials and life experience."
 
 # General Fields
 psychology:
-  label: 'Psychology'
-  permalink: '/psychology'
+  label: "Psychology"
+  permalink: "/psychology"
   description: "Docs related to Psychology."
 
 cognitive-psychology:
-  label: 'Cognitive Psychology'
-  permalink: '/cognitive-psychology'
+  label: "Cognitive Psychology"
+  permalink: "/cognitive-psychology"
   description: "Docs related to Cognitive Psychology."
 
 psychological-testing:
-  label: 'Psychological Testing'
-  permalink: '/psychological-testing'
+  label: "Psychological Testing"
+  permalink: "/psychological-testing"
   description: "Docs related to Psychological Testing."
 
 computer-science:
-  label: 'Computer Science'
-  permalink: '/computer-science'
+  label: "Computer Science"
+  permalink: "/computer-science"
   description: "Docs related to Computer Science."
 
 algorithm:
-  label: 'Algorithm'
-  permalink: '/algorithm'
+  label: "Algorithm"
+  permalink: "/algorithm"
   description: "Docs related to Algorithm."
 
 machine-learning:
-  label: 'Machine Learning'
-  permalink: '/machine-learning'
+  label: "Machine Learning"
+  permalink: "/machine-learning"
   description: "Docs related to Machine Leanring."
 
 deep-learning:
-  label: 'Deep Learning'
-  permalink: '/deep-learning'
+  label: "Deep Learning"
+  permalink: "/deep-learning"
   description: "Docs related to Deep Learning."
 
 statistics:
-  label: 'Statistics'
-  permalink: '/statistics'
+  label: "Statistics"
+  permalink: "/statistics"
   description: "Docs related to Statistics Methods or Concepts."
 
 # Specific Research Topics
 behavioral-experiment:
-  label: 'Behavioral Experiment'
-  permalink: '/behavioral-experiment'
+  label: "Behavioral Experiment"
+  permalink: "/behavioral-experiment"
   description: "Docs related to Behavioral Experiment."
 
 llm:
-  label: 'Large Language Model'
-  permalink: '/llm'
+  label: "Large Language Model"
+  permalink: "/llm"
   description: "Docs related to LLMs."
 
 model-reasoning:
-  label: 'Model Reasoning'
-  permalink: '/model-reasoning'
+  label: "Model Reasoning"
+  permalink: "/model-reasoning"
   description: "Docs related to model reasoning."
 
 clustering-algorithm:
-  label: 'Clustering Algorithm'
-  permalink: '/clustering-algorithm'
+  label: "Clustering Algorithm"
+  permalink: "/clustering-algorithm"
   description: "Docs related to Clustering Algorithm."
 
 dimensionality-reduction:
-  label: 'Dimentionality Reduction'
-  permalink: '/dimensionality-reduction'
+  label: "Dimentionality Reduction"
+  permalink: "/dimensionality-reduction"
   description: "Docs related to Dimentionality Reduction."
 
 gradient-descent:
-  label: 'Gradient Descent'
-  permalink: '/gradient-descent'
+  label: "Gradient Descent"
+  permalink: "/gradient-descent"
   description: "Docs related to Gradient Descent."
 
 human-inspired:
-  label: 'Human Inspired'
-  permalink: '/human-inspired'
+  label: "Human Inspired"
+  permalink: "/human-inspired"
   description: "Docs related to human-inspired research."
 
 remote-sensing:
-  label: 'Remote Sensing'
-  permalink: '/remote-sensing'
+  label: "Remote Sensing"
+  permalink: "/remote-sensing"
   description: "Docs related to remote sensing technologies or paradigms."
 
-# Programming Language  
+# Programming Language
 python:
-  label: 'Python'
-  permalink: '/python'
+  label: "Python"
+  permalink: "/python"
   description: "Docs related to the usage of python or the implementation through python."
 
 java:
   label: "Java"
-  permalink: '/java'
+  permalink: "/java"
   description: "Docs related to the implementation through Java."
 
 javascript:
   label: "Javascript"
-  permalink: '/javascript'
+  permalink: "/javascript"
   description: "Docs related to the implementation through Javascript."
 
 dart:
   label: "Dart"
-  permalink: '/dart'
+  permalink: "/dart"
   description: "Docs related to the implementation through Dart."
-  
+
 # Implementation Tools or Packages
 pytorch:
   label: "PyTorch"
-  permalink: '/pytorch'
+  permalink: "/pytorch"
   description: "Docs related to the projects using pytorch."
 
 tensorflow:
   label: "Tensorflow"
-  permalink: '/tensorflow'
+  permalink: "/tensorflow"
   description: "Docs related to the projects using tensorflow."
 
 tensorflow-lite:
   label: "Tensorflow-Lite"
-  permalink: '/tensorflow-lite'
+  permalink: "/tensorflow-lite"
   description: "Docs related to the projects using tensorflow-lite."
 
 cudf:
   label: "cuDF"
-  permalink: '/cudf'
+  permalink: "/cudf"
   description: "Docs related to the projects using cuDF."
 
 # Backend-related
 flask:
   label: "Flask"
-  permalink: '/flask'
+  permalink: "/flask"
   description: "Docs related to the projects using Flask."
 
 sanic:
   label: "Sanic"
-  permalink: '/sanic'
+  permalink: "/sanic"
   description: "Docs related to the projects using sanic."
 
 # SQL DB
 postgresql:
-  label: 'PostgreSQL'
-  permalink: '/postgresql'
+  label: "PostgreSQL"
+  permalink: "/postgresql"
   description: "Docs related to project using postgresql DB."
 
 mysql:
-  label: 'MySQL'
-  permalink: '/mysql'
+  label: "MySQL"
+  permalink: "/mysql"
   description: "Docs related to project using mysql DB."
 
 # NO-SQL DB
 redisdb:
-  label: 'RedisDB'
-  permalink: '/redisdb'
+  label: "RedisDB"
+  permalink: "/redisdb"
   description: "Docs related to project using Redis DB."
 
 mongodb:
-  label: 'MongoDB'
-  permalink: '/mongodb'
+  label: "MongoDB"
+  permalink: "/mongodb"
   description: "Docs related to project using Mongo DB."
 
 # Frontend-related
 react:
   label: "React"
-  permalink: '/react'
+  permalink: "/react"
   description: "Docs related to the projects using with React package."
 
 nextjs:
   label: "NextJs"
-  permalink: '/nextjs'
+  permalink: "/nextjs"
   description: "Docs related to the projects using with NextJs framework."
 
 typescript:
   label: "Typescript"
-  permalink: '/typescript'
+  permalink: "/typescript"
   description: "Docs related to the projects using Typescript compiling the js."
-  
+
 # App
 flutter:
   label: "Flutter"
-  permalink: '/flutter'
+  permalink: "/flutter"
   description: "Docs related to the projects using Flutter."
 
 android:
   label: "Android App"
-  permalink: '/android'
+  permalink: "/android"
   description: "Docs related to the projects using Android eco-system."
 
 ios:
   label: "IOS App"
-  permalink: '/ios'
+  permalink: "/ios"
   description: "Docs related to the projects using IOS eco-system."

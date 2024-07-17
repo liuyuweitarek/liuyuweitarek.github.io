@@ -1,49 +1,52 @@
 ---
 id: dev-guide
 title: Guides For Developing in Local
-tags: ['manual']
+tags: ["manual"]
 unlisted: true
 sidebar_position: 100
 ---
+
 # Prerequisites
 
 My dev stack is composed of:
 
 1. [Docker Desktop](https://www.docker.com/products/docker-desktop/).
 
-    If your operating system is Windows, you might need to launch WSL2 first.
+   If your operating system is Windows, you might need to launch WSL2 first.
 
 2. [VScode IDE](https://code.visualstudio.com/)
 
 3. VScode extension **Remote - Containers**.
 
-    1. Go to the Extensions view by clicking on the square icon on the left sidebar or by pressing `Ctrl+Shift+X` (Windows/Linux) or `Cmd+Shift+X` (Mac).
-    2. Search for **"Remote - Containers"** in the search bar.
-    3. Click on the "Install" button next to the "Remote - Containers" extension.
-    4. Once the extension is installed, you can follow the instructions provided in the extension's documentation to set up and use it with your project.
-    
-    Please note that the **"VSCode Remote - Containers"** extension allows you to develop inside a containerized environment, which can be useful for Flutter projects that require specific dependencies or configurations.
+   1. Go to the Extensions view by clicking on the square icon on the left sidebar or by pressing `Ctrl+Shift+X` (Windows/Linux) or `Cmd+Shift+X` (Mac).
+   2. Search for **"Remote - Containers"** in the search bar.
+   3. Click on the "Install" button next to the "Remote - Containers" extension.
+   4. Once the extension is installed, you can follow the instructions provided in the extension's documentation to set up and use it with your project.
+
+   Please note that the **"VSCode Remote - Containers"** extension allows you to develop inside a containerized environment, which can be useful for Flutter projects that require specific dependencies or configurations.
 
 # Getting Started
 
 1. In local terminal:
-    ```bash
-    $ docker compose --profile dev up --build -d 
-    ```
+
+   ```bash
+   $ docker compose --profile dev up --build -d
+   ```
 
 2. Open VScode command palette, search "Remote-Containers: Attach to running container" in the search bar and click on the running container name that your just launched.
 
 # Development
+
 1. In container terminal:
 
-    ```bash
-    $ npm start
-    ```
+   ```bash
+   $ npm start
+   ```
 
 2. Local build:
 
-    ```bash
-    $ npm run build
-    ```
+   ```bash
+   $ npm run build
+   ```
 
 3. Renew Algolia DocSearch Index. See more in [renew-algolia-docsearch-index.mdx](./renew-algolia-docsearch-index.mdx)

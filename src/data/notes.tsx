@@ -7,8 +7,8 @@
 
 /* eslint-disable global-require */
 
-import {translate} from '@docusaurus/Translate';
-import {sortBy} from '@site/src/utils/jsUtils';
+import { translate } from "@docusaurus/Translate";
+import { sortBy } from "@site/src/utils/jsUtils";
 
 /*
  * ADD YOUR SITE TO THE DOCUSAURUS SHOWCASE
@@ -36,29 +36,29 @@ import {sortBy} from '@site/src/utils/jsUtils';
 
 export type TagType =
   // Note types
-  | 'implementation'
-  | 'insight'
-  | 'paper-reading'
-  | 'proof-of-concept'
-  | 'analysis'
-  
-  // Fields
-  | 'computer-science'
-  | 'statistics'
-  | 'psychology'
-  | 'behavioral-experiment'
-  | 'algorithm'
+  | "implementation"
+  | "insight"
+  | "paper-reading"
+  | "proof-of-concept"
+  | "analysis"
 
+  // Fields
+  | "computer-science"
+  | "statistics"
+  | "psychology"
+  | "behavioral-experiment"
+  | "algorithm";
 
 const Notes: Note[] = [
   {
-    title: 'Simulate a neuron with PyTorch',
-    description: 'Implement neural network and simulate the all-or-none laws.',
-    preview: require('./images/Simulate-a-neuron-with-PyTorch.png'),
-    website: './ComputerScience/simulate-a-neuron-with-pytorch',
-    source: 'https://colab.research.google.com/drive/1x36lSmRdi8dOPkjzhhjuF8AZbnQWOnzl?usp=sharing',
-    tags: ['implementation', 'computer-science'],
-  }
+    title: "Simulate a neuron with PyTorch",
+    description: "Implement neural network and simulate the all-or-none laws.",
+    preview: require("./images/Simulate-a-neuron-with-PyTorch.png"),
+    website: "./ComputerScience/simulate-a-neuron-with-pytorch",
+    source:
+      "https://colab.research.google.com/drive/1x36lSmRdi8dOPkjzhhjuF8AZbnQWOnzl?usp=sharing",
+    tags: ["implementation", "computer-science"],
+  },
 ];
 
 export type Note = {
@@ -76,102 +76,95 @@ export type Tag = {
   color: string;
 };
 
-export const Tags: {[type in TagType]: Tag} = {
+export const Tags: { [type in TagType]: Tag } = {
   implementation: {
-    label: translate({message: 'Implementation'}),
+    label: translate({ message: "Implementation" }),
     description: translate({
-      message:
-        'We only know what we make.',
-      id: 'tagsearch.tag.implementation.description',
+      message: "We only know what we make.",
+      id: "tagsearch.tag.implementation.description",
     }),
-    color: '#e9669e',
+    color: "#e9669e",
   },
 
-  'insight': {
-    label: translate({message: 'insight'}),
+  insight: {
+    label: translate({ message: "insight" }),
     description: translate({
-      message: 'Notes that record my insights and segment of inspired memory.',
-      id: 'tagsearch.tag.insight.description',
+      message: "Notes that record my insights and segment of inspired memory.",
+      id: "tagsearch.tag.insight.description",
     }),
-    color: '#39ca30',
+    color: "#39ca30",
   },
 
-  'paper-reading': {
-    label: translate({message: 'Paper Reading Notes'}),
+  "paper-reading": {
+    label: translate({ message: "Paper Reading Notes" }),
     description: translate({
-      message: 'Notes that generated from papers I chew!',
-      id: 'tagsearch.tag.paper-reading.description',
+      message: "Notes that generated from papers I chew!",
+      id: "tagsearch.tag.paper-reading.description",
     }),
-    color: '#dfd545',
+    color: "#dfd545",
   },
 
-  'proof-of-concept': {
-    label: translate({message: 'Proof of Concept'}),
+  "proof-of-concept": {
+    label: translate({ message: "Proof of Concept" }),
     description: translate({
-      message:
-        'Simple cases that minimized the question and varified it.',
-      id: 'tagsearch.tag.proof-of-concept.description',
+      message: "Simple cases that minimized the question and varified it.",
+      id: "tagsearch.tag.proof-of-concept.description",
     }),
-    color: '#a44fb7',
+    color: "#a44fb7",
   },
 
   analysis: {
-    label: translate({message: 'Analysis'}),
+    label: translate({ message: "Analysis" }),
     description: translate({
-      message:
-        'Data mining or replicating interesting result from materials.',
-      id: 'tagsearch.tag.analysis.description',
+      message: "Data mining or replicating interesting result from materials.",
+      id: "tagsearch.tag.analysis.description",
     }),
-    color: '#fe6829',
+    color: "#fe6829",
   },
 
-  'computer-science': {
-    label: translate({message: 'Computer Science'}),
+  "computer-science": {
+    label: translate({ message: "Computer Science" }),
     description: translate({
-      message:
-        'Docs related to Computer Science.',
-      id: 'tagsearch.tag.computer-science.description',
+      message: "Docs related to Computer Science.",
+      id: "tagsearch.tag.computer-science.description",
     }),
-    color: '#127f82',
+    color: "#127f82",
   },
 
   statistics: {
-    label: translate({message: 'Statistics'}),
+    label: translate({ message: "Statistics" }),
     description: translate({
-      message:
-        'Docs related to Statistics Methods or Concepts.',
-      id: 'tagsearch.tag.statistics.description',
+      message: "Docs related to Statistics Methods or Concepts.",
+      id: "tagsearch.tag.statistics.description",
     }),
-    color: '#8c2f00',
+    color: "#8c2f00",
   },
 
   psychology: {
-    label: translate({message: 'Psychology'}),
+    label: translate({ message: "Psychology" }),
     description: translate({
-      message: 'Docs related to Psychology.',
-      id: 'tagsearch.tag.psychology.description',
+      message: "Docs related to Psychology.",
+      id: "tagsearch.tag.psychology.description",
     }),
-    color: '#4267b2', // Facebook blue
+    color: "#4267b2", // Facebook blue
   },
 
-  'behavioral-experiment': {
-    label: translate({message: 'Behavioral Experiment'}),
+  "behavioral-experiment": {
+    label: translate({ message: "Behavioral Experiment" }),
     description: translate({
-      message:
-        'Docs related to Behavioral Experiment.',
-      id: 'tagsearch.tag.behavioral-experiment.description',
+      message: "Docs related to Behavioral Experiment.",
+      id: "tagsearch.tag.behavioral-experiment.description",
     }),
-    color: '#14cfc3',
+    color: "#14cfc3",
   },
 
   algorithm: {
-    label: translate({message: 'Algorithm'}),
+    label: translate({ message: "Algorithm" }),
     description: translate({
-      message:
-        'Docs related to Algorithm.',
-      id: 'tagsearch.tag.algorithm.description',
+      message: "Docs related to Algorithm.",
+      id: "tagsearch.tag.algorithm.description",
     }),
-    color: '#ffcfc3',
+    color: "#ffcfc3",
   },
 };
 
@@ -181,7 +174,7 @@ function sortNotes() {
   // Sort by site name
   result = sortBy(result, (note) => note.title.toLowerCase());
   // Sort by implementation tag, implementations first
-  result = sortBy(result, (note) => !note.tags.includes('implementation'));
+  result = sortBy(result, (note) => !note.tags.includes("implementation"));
   return result;
 }
 
