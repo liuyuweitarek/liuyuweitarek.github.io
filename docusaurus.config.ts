@@ -28,6 +28,9 @@ const config: Config = {
     locales: ["en"],
   },
   customFields: {
+    chatbot:{
+      socket_server: process.env.SOCKET_SERVER,
+    }
     // newsletter: {
     //   action:
     //     "https://dev.us14.list-manage.com/subscribe/post?u=4ed0fd1909674fddee53ac3e7&amp;id=dfdcae99f5&amp;f_id=004887e0f0",
@@ -120,10 +123,18 @@ const config: Config = {
         hideable: true,
       },
     },
+    announcementBar: {
+      id: 'support_us',
+      content:
+        '🐧 Jubi has just been born! Say hi to him~ 🎉</a> ',
+      backgroundColor: '#040D12',
+      textColor: '#78D6C6',
+      isCloseable: true,
+    },
     // announcementBar: {
     //   id: 'support_us',
     //   content:
-    //     '🐧 <a target="_blank" rel="noopener noreferrer" href="#">Send Me to Antarctica!</a> 🐧',
+    //     '🐧 <a target="_blank" rel="noopener noreferrer" href="#">Jubi has just been born!</a> 🐧',
     //   backgroundColor: '#040D12',
     //   textColor: '#78D6C6',
     //   isCloseable: true,
