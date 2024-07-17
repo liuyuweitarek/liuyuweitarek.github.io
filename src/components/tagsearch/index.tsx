@@ -1,8 +1,4 @@
 import React, { FunctionComponent } from "react";
-import Translate, {translate} from '@docusaurus/Translate';
-
-import Link from '@docusaurus/Link';
-import Layout from '@theme/Layout';
 import Heading from '@theme/Heading';
 
 import TagSearchBar from '@site/src/components/tagsearch/TagSearchBar/index';

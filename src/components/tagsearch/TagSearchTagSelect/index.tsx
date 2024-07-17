@@ -8,7 +8,6 @@
 import React, {
   useCallback,
   type ComponentProps,
-  type ReactNode,
   type ReactElement,
   useId,
 } from 'react';
