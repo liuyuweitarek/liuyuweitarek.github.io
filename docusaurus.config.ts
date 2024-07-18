@@ -124,19 +124,11 @@ const config: Config = {
         hideable: true,
       },
     },
-    announcementBar: {
-      id: "support_us",
-      content: "🐧 Jubi has just been born! Say hi to him~ 🎉</a> ",
-      backgroundColor: "#040D12",
-      textColor: "#78D6C6",
-      isCloseable: true,
-    },
     // announcementBar: {
-    //   id: 'support_us',
-    //   content:
-    //     '🐧 <a target="_blank" rel="noopener noreferrer" href="#">Jubi has just been born!</a> 🐧',
-    //   backgroundColor: '#040D12',
-    //   textColor: '#78D6C6',
+    //   id: "support_us",
+    //   content: "🐧 Jubi has just been born! Say hi to him~ 🎉</a> ",
+    //   backgroundColor: "#040D12",
+    //   textColor: "#78D6C6",
     //   isCloseable: true,
     // },
     image: "img/logo-small.png",
