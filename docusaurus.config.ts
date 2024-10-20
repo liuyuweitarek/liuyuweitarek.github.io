@@ -78,6 +78,7 @@ const config: Config = {
             "**/__tests__/**",
           ],
           sidebarPath: require.resolve("./sidebars.js"),
+          sidebarCollapsed: true,
           docsRootComponent: "@theme/DocsRoot",
           docVersionRootComponent: "@theme/DocVersionRoot",
           docRootComponent: "@theme/DocRoot",
