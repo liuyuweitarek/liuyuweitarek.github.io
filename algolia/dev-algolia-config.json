@@ -1,7 +1,7 @@
 {
   "index_name": "dev_personal_website",
-  "start_urls": ["https://1f2e-42-73-214-202.ngrok-free.app"],
-  "sitemap_urls": ["https://1f2e-42-73-214-202.ngrok-free.app/sitemap.xml"],
+  "start_urls": ["https://d63d-36-226-104-66.ngrok-free.app"],
+  "sitemap_urls": ["https://d63d-36-226-104-66.ngrok-free.app/sitemap.xml"],
   "sitemap_alternate_links": true,
   "stop_urls": ["/tests"],
   "selectors": {

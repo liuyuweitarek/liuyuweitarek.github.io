@@ -17,7 +17,7 @@ export default function TagSearchBar(): ReactNode {
     <div className={styles.searchBar}>
       <input
         placeholder={translate({
-          message: "Search for site name...",
+          message: "Search for note title...",
           id: "tagsearch.searchBar.placeholder",
         })}
         value={searchName}

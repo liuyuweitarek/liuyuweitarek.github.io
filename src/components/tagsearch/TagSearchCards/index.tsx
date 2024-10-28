@@ -18,12 +18,10 @@ import { useFilteredNotes } from "../_utils";
 import styles from "./styles.module.css";
 
 const favoriteNotes = sortedNotes.filter((note) =>
-  note.tags.includes("implementation"),
+  note.tags.includes("pinned"),
 );
 
-const otherNotes = sortedNotes.filter(
-  (note) => !note.tags.includes("implementation"),
-);
+const otherNotes = sortedNotes.filter((note) => !note.tags.includes("pinned"));
 
 function HeadingNoResult() {
   return (
@@ -36,9 +34,7 @@ function HeadingNoResult() {
 function HeadingFavorites() {
   return (
     <Heading as="h2" className={styles.headingFavorites}>
-      <Translate id="tagsearch.favoritesList.title">
-        Recent Implementation
-      </Translate>
+      <Translate id="tagsearch.favoritesList.title">Pinned Notes</Translate>
       <FavoriteIcon size="large" style={{ marginLeft: "1rem" }} />
     </Heading>
   );
@@ -47,7 +43,7 @@ function HeadingFavorites() {
 function HeadingAllSites() {
   return (
     <Heading as="h2">
-      <Translate id="tagsearch.notesList.allNotes">All sites</Translate>
+      <Translate id="tagsearch.notesList.allNotes">All Notes</Translate>
     </Heading>
   );
 }
