@@ -9,6 +9,12 @@ dev-guide:
   permalink: "/dev-guide"
   description: "Docs related to the this site's development."
 
+# Article Meta States
+pinned:
+  label: "Pinned"
+  permalink: "/pinned"
+  description: "Docs related to pinned articles."
+
 # Property
 implementation:
   label: "Implementation"

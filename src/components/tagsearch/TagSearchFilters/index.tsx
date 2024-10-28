@@ -48,7 +48,7 @@ function TagSearchListItem({ tag }: { tag: TagType }) {
         label={label}
         description={description}
         icon={
-          tag === "implementation" ? (
+          tag === "pinned" ? (
             <FavoriteIcon size="small" style={{ marginLeft: 8 }} />
           ) : (
             <TagCircleIcon
