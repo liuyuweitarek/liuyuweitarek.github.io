@@ -7,6 +7,26 @@ import rehypeKatex from "rehype-katex";
 
 require("dotenv").config();
 
+const skipRenderNoteIDs = [
+  "Psychology/psychology",
+  "ComputerScience/computer-science",
+]
+
+const retainLabels = [
+  "Search", 
+  "Back to Home"
+];
+
+function skipIndex(items) {
+  if (typeof items !== "undefined"){
+    return items.filter(({ type, id, label }) => {
+      return (type === 'doc' && !skipRenderNoteIDs.includes(id))
+      || retainLabels.includes(label);
+    });
+  }
+  return [];
+}
+
 const config: Config = {
   title: "Tarek Liu, Psychoinformatics Engineer",
   tagline:
@@ -77,7 +97,11 @@ const config: Config = {
             "**/*.test.{js,jsx,ts,tsx}",
             "**/__tests__/**",
           ],
-          sidebarPath: require.resolve("./sidebars.js"),
+          sidebarPath: require.resolve("./sidebars.js"),  
+          sidebarItemsGenerator: async function sidebarItemsGenerator({defaultSidebarItemsGenerator, ...args}) {
+            const sidebarItems = await defaultSidebarItemsGenerator(args);
+            return skipIndex(sidebarItems);
+          },
           sidebarCollapsed: true,
           docsRootComponent: "@theme/DocsRoot",
           docVersionRootComponent: "@theme/DocVersionRoot",
@@ -178,7 +202,7 @@ const config: Config = {
           label: "Resume",
           className: "header-resume-link",
           "aria-label": "Resume",
-        },
+        }
       ],
     },
     footer: {
@@ -199,9 +223,9 @@ const config: Config = {
               href: "https://www.linkedin.com/in/liuyuweitarek",
             },
             {
-              label: "HuggingFace",
-              href: "https://huggingface.co/liuyuweitarek",
-            },
+              label: "StackOverflow",
+              href: "https://stackoverflow.com/users/14371814/yu-wei-liu"
+            }
           ],
         },
         {
@@ -236,6 +260,14 @@ const config: Config = {
               label: "Resume",
               href: "https://docs.google.com/document/d/1mNkcT_MbvsATqlk8M02iyPb2zpSEM1q1GZ2r8tK28Mo/edit?usp=sharing",
             },
+            {
+              label: "DockerHub",
+              href: "https://hub.docker.com/u/liuyuweitarek",
+            },
+            {
+              label: "HuggingFace",
+              href: "https://huggingface.co/liuyuweitarek",
+            }
           ],
         },
         {
