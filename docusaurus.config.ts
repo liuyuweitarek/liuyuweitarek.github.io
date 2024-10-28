@@ -10,18 +10,17 @@ require("dotenv").config();
 const skipRenderNoteIDs = [
   "Psychology/psychology",
   "ComputerScience/computer-science",
-]
-
-const retainLabels = [
-  "Search", 
-  "Back to Home"
 ];
 
+const retainLabels = ["Search", "Back to Home"];
+
 function skipIndex(items) {
-  if (typeof items !== "undefined"){
+  if (typeof items !== "undefined") {
     return items.filter(({ type, id, label }) => {
-      return (type === 'doc' && !skipRenderNoteIDs.includes(id))
-      || retainLabels.includes(label);
+      return (
+        (type === "doc" && !skipRenderNoteIDs.includes(id)) ||
+        retainLabels.includes(label)
+      );
     });
   }
   return [];
@@ -97,8 +96,11 @@ const config: Config = {
             "**/*.test.{js,jsx,ts,tsx}",
             "**/__tests__/**",
           ],
-          sidebarPath: require.resolve("./sidebars.js"),  
-          sidebarItemsGenerator: async function sidebarItemsGenerator({defaultSidebarItemsGenerator, ...args}) {
+          sidebarPath: require.resolve("./sidebars.js"),
+          sidebarItemsGenerator: async function sidebarItemsGenerator({
+            defaultSidebarItemsGenerator,
+            ...args
+          }) {
             const sidebarItems = await defaultSidebarItemsGenerator(args);
             return skipIndex(sidebarItems);
           },
@@ -202,7 +204,7 @@ const config: Config = {
           label: "Resume",
           className: "header-resume-link",
           "aria-label": "Resume",
-        }
+        },
       ],
     },
     footer: {
@@ -224,8 +226,8 @@ const config: Config = {
             },
             {
               label: "StackOverflow",
-              href: "https://stackoverflow.com/users/14371814/yu-wei-liu"
-            }
+              href: "https://stackoverflow.com/users/14371814/yu-wei-liu",
+            },
           ],
         },
         {
@@ -267,7 +269,7 @@ const config: Config = {
             {
               label: "HuggingFace",
               href: "https://huggingface.co/liuyuweitarek",
-            }
+            },
           ],
         },
         {

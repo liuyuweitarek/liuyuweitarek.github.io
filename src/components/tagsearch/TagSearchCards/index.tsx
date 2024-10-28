@@ -21,9 +21,7 @@ const favoriteNotes = sortedNotes.filter((note) =>
   note.tags.includes("pinned"),
 );
 
-const otherNotes = sortedNotes.filter(
-  (note) => !note.tags.includes("pinned"),
-);
+const otherNotes = sortedNotes.filter((note) => !note.tags.includes("pinned"));
 
 function HeadingNoResult() {
   return (
@@ -36,9 +34,7 @@ function HeadingNoResult() {
 function HeadingFavorites() {
   return (
     <Heading as="h2" className={styles.headingFavorites}>
-      <Translate id="tagsearch.favoritesList.title">
-        Pinned Notes
-      </Translate>
+      <Translate id="tagsearch.favoritesList.title">Pinned Notes</Translate>
       <FavoriteIcon size="large" style={{ marginLeft: "1rem" }} />
     </Heading>
   );
