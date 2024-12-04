@@ -36,6 +36,7 @@ import { sortBy } from "@site/src/utils/jsUtils";
 
 export type TagType =
   // Note types
+  | "pinned"
   | "implementation"
   | "insight"
   | "paper-reading"
@@ -57,7 +58,7 @@ const Notes: Note[] = [
     website: "./ComputerScience/simulate-a-neuron-with-pytorch",
     source:
       "https://colab.research.google.com/drive/1x36lSmRdi8dOPkjzhhjuF8AZbnQWOnzl?usp=sharing",
-    tags: ["implementation", "computer-science"],
+    tags: ["pinned", "implementation", "computer-science"],
   },
 ];
 
@@ -77,13 +78,22 @@ export type Tag = {
 };
 
 export const Tags: { [type in TagType]: Tag } = {
+  pinned: {
+    label: translate({ message: "Pinned" }),
+    description: translate({
+      message: "Notes that are important.",
+      id: "tagsearch.tag.pinned.description",
+    }),
+    color: "#e96666",
+  },
+
   implementation: {
     label: translate({ message: "Implementation" }),
     description: translate({
       message: "We only know what we make.",
       id: "tagsearch.tag.implementation.description",
     }),
-    color: "#e9669e",
+    color: "#6671e9",
   },
 
   insight: {
@@ -174,7 +184,7 @@ function sortNotes() {
   // Sort by site name
   result = sortBy(result, (note) => note.title.toLowerCase());
   // Sort by implementation tag, implementations first
-  result = sortBy(result, (note) => !note.tags.includes("implementation"));
+  result = sortBy(result, (note) => !note.tags.includes("pinned"));
   return result;
 }
 

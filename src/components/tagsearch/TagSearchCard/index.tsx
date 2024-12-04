@@ -74,7 +74,7 @@ function TagSearchCard({ note }: { note: Note }) {
               {note.title}
             </Link>
           </Heading>
-          {note.tags.includes("implementation") && (
+          {note.tags.includes("pinned") && (
             <FavoriteIcon size="medium" style={{ marginRight: "0.25rem" }} />
           )}
           {note.source && (

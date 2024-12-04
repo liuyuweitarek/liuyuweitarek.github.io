@@ -1,6 +1,7 @@
 name: "docusaurus"
 services:
   dev:
+    container_name: dev-web
     build:
       context: .
       target: dev
@@ -16,6 +17,7 @@ services:
       - NODE_ENV=development
 
   serve:
+    container_name: serve-web
     build:
       context: .
       target: serve
