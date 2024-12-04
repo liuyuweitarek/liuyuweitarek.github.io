@@ -113,6 +113,11 @@ gradient-descent:
   permalink: "/gradient-descent"
   description: "Docs related to Gradient Descent."
 
+chatbot:
+  label: "Chatbot"
+  permalink: "/chatbot"
+  description: "Docs related to chatbot research."
+
 human-inspired:
   label: "Human Inspired"
   permalink: "/human-inspired"
