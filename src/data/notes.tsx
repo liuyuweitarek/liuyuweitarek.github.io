@@ -60,6 +60,14 @@ const Notes: Note[] = [
       "https://colab.research.google.com/drive/1x36lSmRdi8dOPkjzhhjuF8AZbnQWOnzl?usp=sharing",
     tags: ["pinned", "implementation", "computer-science"],
   },
+  {
+    title: "Probability Theory - Random Experiment",
+    description: "Note on probability theory and random experiment.",
+    preview: require("./images/coin-toss.png"),
+    website: "./Statistics/probability-theory-random-experiment",
+    source: null,
+    tags: ["statistics"],
+  },
 ];
 
 export type Note = {

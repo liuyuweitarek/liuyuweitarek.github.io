@@ -6,7 +6,7 @@ sidebar_position: 2
 tags: ["statistics", "probability-theory"]
 draft: false
 last_update:
-  date: 12/7/2024
+  date: 3/4/2025
   author: Tarek Liu
 ---
 
@@ -14,9 +14,52 @@ import Image from "@theme/IdealImage";
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
+:::warning[Disclaimer]
+The key points summarized here are derived from Yeh (2012)<sup>[1](#ref-1)</sup> and Hogg, Tanis, & Zimmerman (2013)<sup>[2](#ref-2)</sup>. These notes are not entirely original but are recorded and organized for personal study and better understanding. If you find them useful, please cite the original works, and always refer to the original texts for the most accurate information.
+:::
+
 ## Random Experiment
-The problem of probability arises from experiments with uncertain outcomes. Such experiments with randomness are termed random experiments.
+The study of probability originates from experiments with uncertain outcomes, referred to as random experiments.
 
-### Defintions
+1. A random experiment is an experiment whose outcome cannot be predicted in advance.
+2. A random experiment <b><i>can be repeated under identical conditions</i></b>.
+3. The probability of a random experiment can be given by the number of favourable outcomes / total number of outcomes.
 
-#### 1
+### Sample Space
+The sample space is the set of all possible outcomes of a random experiment. 
+
+It is denoted by $S$, and it is the universe of all possible outcomes.
+
+### Sample Point
+A sample point is a specific outcome of a random experiment. It is denoted by $x$, and it is a member of the sample space $S$.
+
+### Examples
+
+1. Consider a random experiment in which a fair coin is tossed repeatedly until the first occurrence of a heads ($H$). Let $H$ represent heads and $T$ represent tails. Then, the sample space $S$ is given by:
+
+    $$
+    S = \{H, TH, TTH, ...\}
+    $$
+
+    where each outcome $x \in S$ corresponds to a finite sequence of tosses ending with the first occurrence of heads. Formally, each sample point can be represented as:
+
+    $$
+    x =  T^{k-1}H, \quad k \in \mathbb{N}
+    $$
+
+    where $k$ denotes the trial number on which the first heads occurs, and $T^{k-1}$ represents $k-1$ consecutive tails before the heads.
+
+2. Consider a random experiment in which ramdomly sample the lifespan of light bulbs in a factory. Let $t$ represent the lifespan(in hours) of a bulb. Then, the sample space $S$ is given by:
+
+    $$
+    S = \{t: t \ge 0\} 
+    $$
+
+:::tip[Corrections Are Always Welcome]
+If you find any mistakes or have suggestions for improvement, please feel free to [submit a pull request](https://github.com/liuyuweitarek/liuyuweitarek.github.io/pulls). Your corrections and contributions will be incorporated into these notes. Thank you for your time!
+:::
+
+## References
+<a id="ref-1"></a>1. Yeh, H.-C. (2012). <i>Advanced statistics</i> (8th ed.). College of Law National Taiwan University Library and Stationery Department.
+
+<a id="ref-2"></a>2. Hogg, R. V., Tanis, E. A., & Zimmerman, D. (2013). <i>Probability and statistical inference</i> (9th ed.). Upper Saddle River, NJ: Pearson.
