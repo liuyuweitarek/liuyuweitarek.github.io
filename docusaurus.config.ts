@@ -10,6 +10,7 @@ require("dotenv").config();
 const skipRenderNoteIDs = [
   "Psychology/psychology",
   "ComputerScience/computer-science",
+  "Statistics/statistics",
 ];
 
 const retainLabels = ["Search", "Back to Home"];
