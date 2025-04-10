@@ -3,10 +3,10 @@ id: probability-theory-random-experiment
 title: Probability Theory - Random Experiment
 hide_title: true
 sidebar_position: 2
-tags: ["statistics", "probability-theory"]
+tags: ["statistics", "Probability Theory"]
 draft: false
 last_update:
-  date: 3/4/2025
+  date: 3/7/2025
   author: Tarek Liu
 ---
 
@@ -54,6 +54,57 @@ A sample point is a specific outcome of a random experiment. It is denoted by $x
     $$
     S = \{t: t \ge 0\} 
     $$
+
+
+Based on the different properties of sample points within the sample space, the sample space can be classified into <u>discrete sample space</u> and <u>continuous sample space</u>.
+
+### Discrete Sample Space
+A sample space is called a discrete sample space if all its sample points can be put into a one-to-one correspondence with the set of positive integers($\mathbb{N}$).
+
+### Continuous Sample Space
+A sample space is called a continuous sample space if all its sample points form a continuous set, such as an interval or a region in the Euclidean space $R^{k}$, where 
+$𝑘$ represents the dimensionality of the region.
+
+---
+
+### Event
+A subset of a sample space whose elements share a common property is called an event.
+
+#### Elementary Event
+For any sample point $x$ in the sample space $S$ the set ${x}$ is called an elementary event.
+
+#### Occurrence of an Event
+Given a random experiment where an outcome $x$ is observed, and an event $A \subseteq S$, if $x \in A$, then event $𝐴$ is said to have occurred.
+
+#### Sure Event(Certain Event)
+The event that always occurs. In probability theory, this is simply the sample space $S$ itself, which includes every possible outcome of a random experiment.
+
+#### Null Event
+Let $\varnothing$ be an element of $S$. Since $\varnothing$ contains no sample points from $S$, it is called the null event.
+
+#### Example
+Toss a fair coin 3 times. Let $H$ represent heads and $T$ represent tails. Then, the sample space $S$ is given by:
+    $$  
+    S = \{HHH, HHT, HTT, HTH, THH, TTH, THT, TTT\}
+    $$
+Let 
+    $$
+    A_{i}=\{\text{ i heads occurred during the 3 tosses }\} \text{, where } i=0,1,2,3
+    $$
+Then
+    $$
+    \begin{align*}
+    A_{0} &= \{TTT\} \\
+    A_{1} &= \{HTT, TTH, THT\} \\
+    A_{2} &= \{THH, HTH, HHT\} \\
+    A_{3} &= \{HHH\}
+    \end{align*}
+    $$
+According to the above definition,
+- All $A_{i}$ are events.
+- $A_{0}$, $A_{3}$ are elementary events.
+- If $\{HTT\}$ happenned, then is so called $A_{1}$ happened, $A_{0}$, $A_{2}$ and $A_{3}$ not happened. 
+
 
 :::tip[Corrections Are Always Welcome]
 If you find any mistakes or have suggestions for improvement, please feel free to [submit a pull request](https://github.com/liuyuweitarek/liuyuweitarek.github.io/pulls). Your corrections and contributions will be incorporated into these notes. Thank you for your time!
