@@ -68,6 +68,14 @@ const Notes: Note[] = [
     source: null,
     tags: ["statistics"],
   },
+  {
+    title: "Set Theory - Basic Rules",
+    description: "Note about Set theory and basic rules.",
+    preview: require("./images/Venn.png"),
+    website: "./Statistics/set-theory-basic-rules",
+    source: null,
+    tags: ["statistics"],
+  },
 ];
 
 export type Note = {

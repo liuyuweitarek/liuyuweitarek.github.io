@@ -1,0 +1,158 @@
+---
+id: set-theory-basic-rules
+title: Set Theory - Basic Rules
+hide_title: true
+sidebar_position: 3
+tags: ["statistics", "Set Theory"]
+draft: true
+last_update:
+  date: 3/7/2025
+  author: Tarek Liu
+---
+
+import Image from "@theme/IdealImage";
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+:::warning[Disclaimer]
+The key points summarized here are derived from Yeh (2012)<sup>[1](#ref-1)</sup> and Hogg, Tanis, & Zimmerman (2013)<sup>[2](#ref-2)</sup>. These notes are not entirely original but are recorded and organized for personal study and better understanding. If you find them useful, please cite the original works, and always refer to the original texts for the most accurate information.
+:::
+
+## Set Theory
+
+### Sample space
+All possible outcomes of a particular experiment, denoted by $\Omega$.
+
+Every outcome in $\Omega$ is called an element , denoted by $w$. The element in $\Omega$ is denoted by $w \in \Omega$.
+
+:::note
+**Element in Sample space:**  $w \in \Omega$.
+
+**Set belongs to Set:** $S_{A} \subseteq S_{B}$
+:::
+
+### Set operations
+Let $A$ and $B$ be sets, and let ${A_{n}}$ be a sequence of subsets of $\Omega$.
+
+#### 1. Subset 
+
+$A$ is a subset of $B$, denoted as $A \subseteq B$, and every element in $A$ is also an element in $B$.
+
+#### 2. Set Equality 
+
+$A$ is equal to $B$, denoted as $A = B$. That is, $A \subseteq B$ and $B \subseteq A$, both conditions hold simultaneously.
+
+#### 3. Null Set
+
+The null set, denoted as $\varnothing$, is a set that contains no elements.
+
+#### 4. Complement Set 
+
+The complement of set $A$, denoted as $A^{c}$, is the set of all elements in $\Omega$ that are not in $A$.
+$$
+A^{c} = \{ w \mid w \in \Omega \land w \not \in A \}
+$$
+
+#### 5. Union
+
+The union of sets $A$ and $B$, denoted as $A \cup B$, is the set of all elements in $A$ and $B$.
+$$
+A \cup B = \{ w \mid w \in A \lor w \in B \}
+$$
+
+#### 6. Intersection
+
+The intersection of sets $A$ and $B$, denoted as $A \cap B$, is the set of all elements in $A$ and $B$.
+$$
+A \cap B = \{ w \mid w \in A \land w \in B \}
+$$
+
+#### 7. Set Difference
+
+**$A \backslash B$**: The set of all elements that are in $A$ but not in $B$:
+
+$$  
+A \backslash B = A \cap B^{c} =\{ w \mid w \in A \land w \not \in B \}
+$$
+
+**$B \backslash A$**: The set of all elements that are in $B$ but not in $A$:
+
+$$  
+B \backslash A = B \cap A^{c} = \{ w \mid w \in B \land w \not \in A \}
+$$  
+
+#### 8. Disjoint or Mutually Exclusive  
+
+If $A$ and $B$ have no common elements, they are called disjoint sets, denoted as $A \cap B = \varnothing$. 
+
+
+#### 9. Upper Limit
+
+$$
+{\limsup}_{n} \bigcap_{k=1}^{\infty} \bigcup_{n=k}^{\infty} A_{n} = \{w \mid w \in A_{n} \text{ for infinitely many values of n }\}
+$$
+
+#### 10. Lower Limit 
+
+$$
+{\liminf}_{n} \bigcup_{k=1}^{\infty} \bigcap_{n=k}^{\infty} A_{n} = \{w \mid w \in A_{n} \text{ for all but finitely many values of n }\}
+$$
+
+#### 11. Set Convergence
+
+The sequence $\{A_{n} \}$ converges to $A$ if ${\limsup}_{n}A_{n} = {\liminf}_{n}A_{n} = A$, which is denoted by $\lim_{n \to \infty} A_{n} = A$.
+
+### Generalization to Multiple Sets
+
+The operations of union and intersection <u>can be extended to any finite or infinite number of sets.</u>
+
+**Extend operation to finite sets**
+
+Let $A_{1}, A_{2}, \ldots, A_{n}$ be subsets of $S$, such that each $A_{i} \subseteq S$ for $i=1, 2, \ldots, n$. 
+
+Their <u>union</u> is denoted as:
+
+$$
+A_{1} \cup A_{2} \cup \cdots \cup A_{n} = \bigcup_{i=1}^{n} A_{i} = \{ x \mid x \in A_{1} \lor x \in A_{2} \lor \ldots \lor x \in A_{i} \,,  \forall i \in \{1, 2, \ldots, n\}\}
+$$
+
+, and their <u>intersection</u> is denoted as:
+
+$$
+A_{1} \cap A_{2} \cap \cdots \cap A_{n} = \bigcap_{i=1}^{n} A_{i} = \{ x \mid x \in A_{1} \land x \in A_{2} \land \ldots \land x \in A_{i} \,, \forall i \in \{1, 2, \ldots, n\}\}
+$$
+
+**Extend operation to infinite sets**
+
+Let $A_{1}, A_{2}, \ldots, A_{n}$ be subsets of $S$, such that each $A_{i} \subseteq S$ for $i=1, 2, \ldots, n, \ldots$. 
+
+Their <u>union</u> is denoted as:
+
+$$
+A_{1} \cup A_{2} \cup \cdots \cup A_{n} \cup \cdots= \bigcup_{i=1}^{\infty} A_{i} = \{ x \mid x \in A_{1} \lor x \in A_{2} \lor \ldots \lor x \in A_{i} \,,  \forall i \in \{1, 2, \ldots, n, \ldots\}\}
+$$
+
+, and their <u>intersection</u> is denoted as:
+
+$$
+A_{1} \cap A_{2} \cap \cdots \cap A_{n} \cap \cdots = \bigcap_{i=1}^{\infty} A_{i} = \{ x \mid x \in A_{1} \land x \in A_{2} \land \ldots \land x \in A_{i} \,, \forall i \in \{1, 2, \ldots, n, \ldots\}\}
+$$
+
+### Properties
+
+1. Commutativity: $A \cup B = B \cup A$ ; $A \cap B = B \cap A$
+
+2. Associativity: $(A \cup B) \cup C = A \cup (B \cup C)$ ; $(A \cap B) \cap C = A \cap (B \cap C)$
+
+3. Distributive Law: $A \cup (B \cap C) = (A \cup B) \cap (A \cup C)$ ; $A \cap (B \cup C) = (A \cap B) \cup (A \cap C)$
+
+4. DeMorgen's Law: ${(A \cup B)}^{c} = A^{c} \cap B^{c}$ ; ${(A \cap B)}^{c} = A^{c} \cup B^{c}$ 
+
+:::tip[Corrections Are Always Welcome]
+If you find any mistakes or have suggestions for improvement, please feel free to [submit a pull request](https://github.com/liuyuweitarek/liuyuweitarek.github.io/pulls). Your corrections and contributions will be incorporated into these notes. Thank you for your time!
+:::
+
+## References
+<a id="ref-1"></a>1. Yeh, H.-C. (2012). <i>Advanced statistics</i> (8th ed.). College of Law National Taiwan University Library and Stationery Department.
+
+<a id="ref-2"></a>2. Hogg, R. V., Tanis, E. A., & Zimmerman, D. (2013). <i>Probability and statistical inference</i> (9th ed.). Upper Saddle River, NJ: Pearson.
