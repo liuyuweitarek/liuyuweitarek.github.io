@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+    <channel>
+        <title>Tarek Liu, Psychoinformatics Engineer Blog</title>
+        <link>https://liuyuweitarek.github.io/blog</link>
+        <description>Tarek Liu, Psychoinformatics Engineer Blog</description>
+        <lastBuildDate>Thu, 30 Sep 2021 18:00:00 GMT</lastBuildDate>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+        <generator>https://github.com/jpmonette/feed</generator>
+        <language>en</language>
+        <copyright>All content copyright © 2021-2025 &lt;a href="https://github.com/liuyuweitarek" target="_blank"&gt;Tarek Liu&lt;/a&gt;. All rights reserved.&lt;br/&gt;The web page uses the &lt;a href="https://github.com/liuyuweitarek/liuyuweitarek.github.io/blob/main/LICENSE_PAGE_TEMPLATE.md" target="_blank"&gt;MIT License&lt;/a&gt; licensed template &lt;a href="https://github.com/pkosiec/website" target="_blank"&gt;pkosiec/website&lt;/a&gt;. </copyright>
+        <item>
+            <title><![CDATA[Hello, world.]]></title>
+            <link>https://liuyuweitarek.github.io/blog/hello-world</link>
+            <guid>https://liuyuweitarek.github.io/blog/hello-world</guid>
+            <pubDate>Thu, 30 Sep 2021 18:00:00 GMT</pubDate>
+            <description><![CDATA[Hello, I am Tarek, who’s interested in implementing psychological paradigms into human-robot interaction, particularly for observing human beings’ actual behaviors using digital phenotyping or informatics methods.]]></description>
+            <content:encoded><![CDATA[<p>Hello, I am Tarek, who’s interested in implementing psychological paradigms into human-robot interaction, particularly for observing human beings’ actual behaviors using digital phenotyping or informatics methods.</p>
+<p>My interest in <ins><a href="https://en.wikipedia.org/wiki/Psychoinformatics" target="_blank" rel="noopener noreferrer">psychoinformatics</a></ins><sup><a href="https://liuyuweitarek.github.io/blog/hello-world#ref-1">1</a>, </sup><sup><a href="https://liuyuweitarek.github.io/blog/hello-world#ref-2">2</a></sup> can be traced back to the time when I questioned <em><strong>if self-report was a reliable method to quantify human’s traits</strong></em>. The question also led me to recognize the need for replication in psychology for the first time. On the replication issue, <a href="https://doi.org/10.1111/j.1745-6916.2007.00051.x" target="_blank" rel="noopener noreferrer">Baumeister(2007)</a><sup><a href="https://liuyuweitarek.github.io/blog/hello-world#ref-3">3</a></sup> stated that researchers should be more careful about actual behaviors than simply believing in introspective self-reports or reaction times.</p>
+<p>For example, in order to measure <a href="https://www.socialmindfulness.nl/" target="_blank" rel="noopener noreferrer">social mindfulness</a> without using questionnaires, <a href="https://doi.org/10.1037/a0032540" target="_blank" rel="noopener noreferrer">Van(2013)</a><sup><a href="https://liuyuweitarek.github.io/blog/hello-world#ref-4">4</a></sup> gave each participants three pens, two in an identical color and the third in a different color. Participants were told, after picking up one pen, another person would pick up another pen. <a href="https://doi.org/10.1037/a0032540" target="_blank" rel="noopener noreferrer">Van(2013)</a><sup><a href="https://liuyuweitarek.github.io/blog/hello-world#ref-4">4</a></sup> used this simple actual behavior to determine if the participant had social mindfulness. Furthermore, <a href="https://doi.org/10.1037/0022-3514.82.3.379" target="_blank" rel="noopener noreferrer">Gospling(2002)</a><sup><a href="https://liuyuweitarek.github.io/blog/hello-world#ref-5">5</a></sup> assessed the personality with the tidiness of bedroom and <a href="https://doi.org/10.1038/nature17160" target="_blank" rel="noopener noreferrer">Gachter(2016)</a><sup><a href="https://liuyuweitarek.github.io/blog/hello-world#ref-6">6</a></sup> measured intrinsic honesty and the prevalence of rule violations across social segments using the expectation value of throwing dices.</p>
+<p>With all these creative and brilliant paradigms, psychological experiments could be implemented into authentic life conditions rather than in the laboratory, which participants might change their behavior or be with poor intention because of knowing it’s an experiment. To extend the range of behavioral data collecting field, I started to sharp my technical skill on developing wearable devices, apps, web applications and even social robotics. For instance, I developed phone tracker apps and collected data from participants’ cellphones, including GPS locations, accelerometers, gyroscopes and photoreceptors, in order to yield correlations with human’s cognitive functions. Furthermore, without dropping the crystallized form of psychological tests, I designed <a href="https://doi.org/10.1007/s12369-020-00716-y" target="_blank" rel="noopener noreferrer">Asynchronous Testing Question(ATQ)</a><sup><a href="https://liuyuweitarek.github.io/blog/hello-world#ref-7">7</a></sup>, embedding psychological test questions into human—robot conversations for user profiling, and developed the robot remote controlling system to improving machine cognition and service.</p>
+<p>I’m fully aware of the dedication, resilience and resolve required to persue the future project！ Feel free to email me to learn more about my current work or discuss research projects you would like me to implement. :)</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="references">References<a class="hash-link" aria-label="Direct link to References" title="Direct link to References" href="https://liuyuweitarek.github.io/blog/hello-world#references">​</a></h3>
+<p><a id="ref-1"></a> 1. Yarkoni, T. (2012). Psychoinformatics: New Horizons at the
+Interface of the Psychological and Computing Sciences. <i>Current Directions in Psychological Science</i>
+, <i>21</i>(6), 391-397. <a href="https://doi.org/10.1177/0963721412457362%7B" target="_blank" rel="noopener noreferrer">https://doi.org/10.1177/0963721412457362{</a>" "}</p>
+<p><a id="ref-2"></a> 2. Montag, C., Duke, É., &amp; Markowetz, A. (2016). Toward
+Psychoinformatics: Computer Science Meets Psychology. <i>Computational and mathematical methods in medicine</i>
+, <i>2016</i>, 2983685. <a href="https://doi.org/10.1155/2016/2983685" target="_blank" rel="noopener noreferrer">https://doi.org/10.1155/2016/2983685</a></p>
+<p><a id="ref-3"></a> 3. Baumeister, R. F., Vohs, K. D., &amp; Funder, D. C. (2007).
+Psychology as the Science of Self-Reports and Finger Movements: Whatever
+Happened to Actual Behavior? <i>Perspectives on Psychological Science</i>, <i>2</i>
+(4), 396-403. <a href="https://doi.org/10.1111/j.1745-6916.2007.00051.x" target="_blank" rel="noopener noreferrer">https://doi.org/10.1111/j.1745-6916.2007.00051.x</a></p>
+<p><a id="ref-4"></a> 4. Van Doesum, N. J., Van Lange, D. A. W., &amp; Van Lange, P. A.
+M. (2013). Social mindfulness: Skill and will to navigate the social world. <i>Journal of Personality and Social Psychology</i>
+, <i>105</i>(1), 86–103. <a href="https://doi.org/10.1037/a0032540" target="_blank" rel="noopener noreferrer">https://doi.org/10.1037/a0032540</a></p>
+<p><a id="ref-5"></a> 5. Gosling, S. D., Ko, S. J., Mannarelli, T., &amp; Morris, M. E.
+(2002). A room with a cue: Personality judgments based on offices and bedrooms. <i>Journal of Personality and Social Psychology</i>
+, <i>82</i>(3), 379–398. <a href="https://doi.org/10.1037/0022-3514.82.3.379" target="_blank" rel="noopener noreferrer">https://doi.org/10.1037/0022-3514.82.3.379</a></p>
+<p><a id="ref-6"></a> 6. Gächter, S., &amp; Schulz, J. F. (2016). Intrinsic honesty and
+the prevalence of rule violations across societies. <i>Nature</i>, <i>531</i>
+(7595), 496–499. <a href="https://doi.org/10.1038/nature17160" target="_blank" rel="noopener noreferrer">https://doi.org/10.1038/nature17160</a></p>
+<p><a id="ref-7"></a> 7. Huang, TR., Liu, YW., Hsu, SM. et al. Asynchronously
+Embedding Psychological Test Questions into Human–Robot Conversations for User
+Profiling. <i>Int J of Soc Robotics</i> <strong>13</strong>, 1359–1368 (2021).
+<a href="https://doi.org/10.1007/s12369-020-00716-y" target="_blank" rel="noopener noreferrer">https://doi.org/10.1007/s12369-020-00716-y</a></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="cite-this-article">Cite this article<a class="hash-link" aria-label="Direct link to Cite this article" title="Direct link to Cite this article" href="https://liuyuweitarek.github.io/blog/hello-world#cite-this-article">​</a></h3>
+<div class="tabs-container tabList__CuJ"><ul role="tablist" aria-orientation="horizontal" class="tabs"><li role="tab" tabindex="0" aria-selected="true" class="tabs__item tabItem_LNqP tabs__item--active">BibTex</li></ul><div class="margin-top--md"><div role="tabpanel" class="tabItem_Ymn6"><div class="codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">@misc{tarekwebsite,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  title={Hello, world.}, </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  author={Tarek Liu},</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  year={2021},</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  url={https://liuyuweitarek.github.io/blog/hello-world}</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div></div></div></div>]]></content:encoded>
+            <category>shorts</category>
+            <category>hello</category>
+            <category>introduction</category>
+        </item>
+    </channel>
+</rss>
