@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkliuyuweitarek=self.webpackChunkliuyuweitarek||[]).push([["1833"],{5513(e){e.exports=JSON.parse('{"title":"Recent posts","items":[{"title":"Hello, world.","permalink":"/blog/hello-world","unlisted":false,"date":"2021-09-30T18:00:00.000Z"}]}')}}]);

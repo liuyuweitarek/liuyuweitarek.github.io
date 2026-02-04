@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkliuyuweitarek=self.webpackChunkliuyuweitarek||[]).push([[8121],{8070:l=>{l.exports=JSON.parse('{"tags":[{"label":"shorts","permalink":"/blog/tags/shorts","count":1},{"label":"hello","permalink":"/blog/tags/hello","count":1},{"label":"introduction","permalink":"/blog/tags/introduction","count":1}]}')}}]);

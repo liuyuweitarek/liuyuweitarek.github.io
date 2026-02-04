@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkliuyuweitarek=self.webpackChunkliuyuweitarek||[]).push([["8416"],{6600(e){e.exports=JSON.parse('{"authors":[{"name":"Tarek Liu","title":"Psychoinformatics Engineer","url":"https://liuyuweitarek.github.io","imageURL":"/img/avatar-128px.jpg","key":"liuyuweitarek","page":null,"count":1}]}')}}]);
